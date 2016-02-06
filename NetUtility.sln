@@ -24,6 +24,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitCommands", "GitCommands"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.ConsoleTest", "RJ.ConsoleTest\RJ.ConsoleTest.csproj", "{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{C911046C-F2C1-4F33-A8D9-B028D216F9C9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScripts", "SqlScripts", "{1135AAA0-D76D-427C-B2B2-5BCFC7717219}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\WebAPI\NetUtilityScripts.sql = ..\..\..\WebAPI\NetUtilityScripts.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
