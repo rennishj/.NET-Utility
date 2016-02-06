@@ -1,0 +1,14 @@
+Step 1:
+---------------
+Refer to this link for step by step commnads
+https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
+
+Step 2:
+-------------
+https://help.github.com/articles/adding-a-file-to-a-repository-from-the-command-line/
+
+Step 3:
+------------
+Using Posh-Git (Git commnads can be run in poweshell (Please run as admin when you run git commnads in poweshell))
+
+https://git-scm.com/book/en/v2/Git-in-Other-Environments-Git-in-Powershell
