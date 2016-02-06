@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitCommands", "GitCommands"
 		GitCommands.txt = GitCommands.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.ConsoleTest", "RJ.ConsoleTest\RJ.ConsoleTest.csproj", "{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{CC4F7574-9F9D-4227-ADFA-C8788F150230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CC4F7574-9F9D-4227-ADFA-C8788F150230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CC4F7574-9F9D-4227-ADFA-C8788F150230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -48,5 +54,6 @@ Global
 		{4748518D-1181-4BB3-949D-8A48EC78EDAA} = {384C34AC-87F9-42F4-98D3-F3254C378CEE}
 		{1226EC80-4A65-4F51-9ACB-00FA20026826} = {F93A3E5F-5F11-431E-929D-9E0F21F46E3B}
 		{CC4F7574-9F9D-4227-ADFA-C8788F150230} = {49CE13F2-F9E2-4346-95B7-D97FF88112EB}
+		{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8} = {0E4DF9C8-ABC6-4BD6-8D51-5479EC1C0F5D}
 	EndGlobalSection
 EndGlobal
