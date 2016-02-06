@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>b6e5fd83-7e0a-4a64-9408-ccfd42e95ed7</ProjectGuid>
+    <ProjectGuid>{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RJ.ConsoleTest</RootNamespace>
