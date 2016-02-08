@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D89616CF-9CE6-4A9C-B67F-FF7E7A05EE30}</ProjectGuid>
+    <ProjectGuid>{AAA8C731-FEA6-45D6-946D-93F3C5287812}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RJ.Utils</RootNamespace>
-    <AssemblyName>RJ.Utils</AssemblyName>
+    <RootNamespace>RJ.Poco</RootNamespace>
+    <AssemblyName>RJ.Poco</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -39,14 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Utils.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RJ.Poco\RJ.Poco.csproj">
-      <Project>{aaa8c731-fea6-45d6-946d-93f3c5287812}</Project>
-      <Name>RJ.Poco</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
