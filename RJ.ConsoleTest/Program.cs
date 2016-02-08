@@ -1,4 +1,6 @@
-﻿using System;
+﻿using RJ.Poco;
+using RJ.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,16 +12,14 @@ namespace RJ.ConsoleTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter Console Actions");
-            int axn = Int32.Parse(Console.ReadLine());
-            switch (axn)
+            try
             {
-                case 1:
-                    PrintHeader();
-                    break;
-                default:
-                    break;
+                CsvHelper.WriteCsv<Person>(GetPersons(), @"C\Test\Person.csv","|");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }            
             Console.ReadKey();
 
         }
@@ -29,6 +29,21 @@ namespace RJ.ConsoleTest
             string[] columns = new string[] { "PersonId", "FirstName", "LastName" };
             string header = string.Join("|", columns);
             Console.WriteLine(header);
+        }
+
+        private static List<Person> GetPersons()
+        {
+            List<Person> persons = new List<Person>();
+            for (int i = 0; i < 10; i++)
+            {
+                persons.Add(new Person
+                {
+                    FirstName = "Rennish_" + i.ToString(),
+                    LastName = "Joseph_" + i.ToString(),
+                    PersonId = i
+                });
+            }
+            return persons;
         }
     }
 
