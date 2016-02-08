@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{72307750-9EB0-4F9B-9A0D-3288A5BFDCC8}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{AAA8C731-FEA6-45D6-946D-93F3C5287812}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RJ.ConsoleTest</RootNamespace>
-    <AssemblyName>RJ.ConsoleTest</AssemblyName>
+    <RootNamespace>RJ.Poco</RootNamespace>
+    <AssemblyName>RJ.Poco</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -23,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -41,21 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RJ.Poco\RJ.Poco.csproj">
-      <Project>{aaa8c731-fea6-45d6-946d-93f3c5287812}</Project>
-      <Name>RJ.Poco</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RJ.Utils\RJ.Utils.csproj">
-      <Project>{d89616cf-9ce6-4a9c-b67f-ff7e7a05ee30}</Project>
-      <Name>RJ.Utils</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
