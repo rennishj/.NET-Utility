@@ -14,12 +14,13 @@ namespace RJ.ConsoleTest
         {
             try
             {
-                CsvHelper.WriteCsv<Person>(GetPersons(), @"C\Test\Person.csv","|");
+                CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }            
+            }
+            Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
 
         }
@@ -34,13 +35,14 @@ namespace RJ.ConsoleTest
         private static List<Person> GetPersons()
         {
             List<Person> persons = new List<Person>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 1000000; i++)
             {
                 persons.Add(new Person
                 {
                     FirstName = "Rennish_" + i.ToString(),
                     LastName = "Joseph_" + i.ToString(),
-                    PersonId = i
+                    PersonId = i,
+                    ZipCode = "32225_" + i.ToString()
                 });
             }
             return persons;

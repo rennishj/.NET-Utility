@@ -21,7 +21,6 @@ namespace RJ.Utils
                 //Writ header
                 sw.WriteLine(header);
                 //Write columns
-
             }
 
         }
@@ -35,8 +34,12 @@ namespace RJ.Utils
         {
             using (StreamWriter sw = new StreamWriter(path,false,Encoding.UTF8))
             {
+                if (!File.Exists(path))
+                {
+                    File.Create(path);
+                }
                 string data = GetCsv(items,delimiter);
-                sw.WriteAsync(data);
+                sw.WriteLine(data);
             }
         
         }
@@ -54,7 +57,7 @@ namespace RJ.Utils
         {
             StringBuilder sb = new StringBuilder();
             PropertyInfo[] pInfo = typeof(T).GetProperties();
-            for (int i = 0; i < pInfo.Length - 1; i++)
+            for (int i = 0; i <= (pInfo.Length - 1); i++)
             {
                 //This is for the header
                 sb.Append(pInfo[i].Name);
@@ -70,7 +73,7 @@ namespace RJ.Utils
             for (int i = 0; i < (list.Count - 1); i++)
             {
                 T item = list[i];
-                for (int j = 0; j < (pInfo.Length - 1); j++)
+                for (int j = 0; j <= (pInfo.Length - 1); j++)
                 {
                     object propertyValue = item.GetType().GetProperty(pInfo[j].Name).GetValue(item, null);
                     //To do :Add the check for custom CsvIgnore attribute
@@ -97,9 +100,9 @@ namespace RJ.Utils
                     if (j < pInfo.Length - 1)
                     {
                         sb.Append(delimiter);
-                    }
-                    sb.AppendLine();
+                    }                    
                 }
+                sb.AppendLine();
             }
             return sb.ToString();
         }
