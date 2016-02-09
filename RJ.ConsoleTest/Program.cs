@@ -35,7 +35,7 @@ namespace RJ.ConsoleTest
         private static List<Person> GetPersons()
         {
             List<Person> persons = new List<Person>();
-            for (int i = 0; i < 1000000; i++)
+            for (int i = 0; i < 10; i++)
             {
                 persons.Add(new Person
                 {

@@ -1,4 +1,5 @@
 ﻿using RJ.Poco;
+using RJ.Poco.Attributes;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,7 +57,7 @@ namespace RJ.Utils
         public static string GetCsv<T>(this List<T> list,string delimiter)
         {
             StringBuilder sb = new StringBuilder();
-            PropertyInfo[] pInfo = typeof(T).GetProperties();
+            PropertyInfo[] pInfo = typeof(T).GetProperties().Where(p => { return p.GetCustomAttribute<CsvIgnore>() == null; }).ToArray();
             for (int i = 0; i <= (pInfo.Length - 1); i++)
             {
                 //This is for the header
@@ -75,9 +76,11 @@ namespace RJ.Utils
                 T item = list[i];
                 for (int j = 0; j <= (pInfo.Length - 1); j++)
                 {
-                    object propertyValue = item.GetType().GetProperty(pInfo[j].Name).GetValue(item, null);
+                    PropertyInfo property = item.GetType().GetProperty(pInfo[j].Name);
+                    object propertyValue = property.GetValue(item, null);
+                    CsvIgnore csvIgnore = property.GetCustomAttribute(typeof(CsvIgnore)) as CsvIgnore;
                     //To do :Add the check for custom CsvIgnore attribute
-                    if (propertyValue != null)
+                    if (propertyValue != null && csvIgnore == null)
                     {
                         string propValueString = propertyValue.ToString();
 
