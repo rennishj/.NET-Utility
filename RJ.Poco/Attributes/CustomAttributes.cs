@@ -16,6 +16,9 @@ namespace RJ.Poco.Attributes
         }
     }
 
+    /// <summary>
+    /// This attribute is used to exclude properties from the csv file generation
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property,AllowMultiple = false)]
     public class CsvIgnore : Attribute
     {
