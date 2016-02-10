@@ -14,7 +14,7 @@ namespace RJ.ConsoleTest
         {
             try
             {
-                CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");
+                CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");                
             }
             catch (Exception ex)
             {
@@ -23,6 +23,17 @@ namespace RJ.ConsoleTest
             Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
 
+        }
+
+        private static void TestPolymorphism()
+        {
+            var shapes = new List<Shape>();
+            shapes.Add(new Circle());
+            shapes.Add(new Triangle());
+            foreach (var shape in shapes)
+            {
+                shape.Draw();
+            }
         }
 
         private static void PrintHeader()
@@ -53,4 +64,33 @@ namespace RJ.ConsoleTest
     { 
         PrintHeader = 1,
     }
+
+    #region C# Interview Prep
+    public class Shape
+    {
+        public virtual void Draw()
+        {
+            Console.WriteLine("Base classes Draw");
+        }
+    }
+    public class Circle : Shape
+    {
+        public override void Draw()
+        {
+            Console.WriteLine("Circles draw gets called");
+            base.Draw();
+        }
+    }
+
+    public class Triangle : Shape
+    {
+        public override void Draw()
+        {
+            Console.WriteLine("Drawing a Triangle");
+            base.Draw();
+        }
+    }
+
+    #endregion
+    
 }
