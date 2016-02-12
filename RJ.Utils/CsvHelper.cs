@@ -6,7 +6,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace RJ.Utils
 {
@@ -108,6 +107,80 @@ namespace RJ.Utils
                 sb.AppendLine();
             }
             return sb.ToString();
+        }
+        /// <summary>
+        /// This is used to split large csv files into two separate files
+        /// </summary>
+        /// <param name="filePath"></param>
+        public static void ReportBurstFiles(string filePath,string delimiter)
+        {
+            long length = (new FileInfo(filePath).Length / 1024);
+            string[] header = null;
+            string headerRow = null;
+            int? previousPersonId = null;
+            int? currentPersonId = null;
+            string currentLine = null;
+            string burstedFilePath = null;
+            StringBuilder sb = new StringBuilder();
+            using (StreamReader sr = new StreamReader(filePath))
+            {
+                headerRow = sr.ReadLine();
+                if (headerRow != null)
+                {
+                    header = headerRow.Split(new string[]{delimiter}, StringSplitOptions.RemoveEmptyEntries);
+                    sb.Append(headerRow);
+                }
+                while (!sr.EndOfStream)
+                {
+                    currentLine = sr.ReadLine();
+                    if (!string.IsNullOrWhiteSpace(currentLine))
+                    {
+                        string[] row = currentLine.Split(new string[] { delimiter }, StringSplitOptions.RemoveEmptyEntries);
+                        currentPersonId = Convert.ToInt32(row[0]);
+                        if (previousPersonId == null || currentPersonId.Value == previousPersonId.Value)
+                        { 
+                         //data belongs to the same person
+                            previousPersonId = currentPersonId;
+                            if (sb == null)
+                            {
+                                sb = new StringBuilder();
+                            }
+                            sb.AppendLine();
+                            sb.Append(currentLine);
+                        }
+                        else if (previousPersonId != null && currentPersonId.Value != previousPersonId.Value)
+                        { 
+                            //This is the start of the new person data,so write the previous data
+                            burstedFilePath = @"C:\Test\" + string.Format("{0}.{1}.{2}", previousPersonId.Value, DateTime.Now.ToString("ddMMyyyyhhmmss"),"csv");
+                            CreateTheCsvFile(burstedFilePath, sb.ToString());
+                            sb = null;
+                            //Get the new row details
+                            sb = new StringBuilder();
+                            sb.Append(headerRow);
+                            sb.AppendLine();
+                            sb.Append(currentLine);
+                            previousPersonId = currentPersonId;
+                            burstedFilePath = @"C:\Test\" + string.Format("{0}.{1}.{2}", currentPersonId.Value, DateTime.Now.ToString("ddMMyyyyhhmmss"), "csv");
+                            currentPersonId = null;                            
+                        }
+                        
+                    }
+                }
+                //write the last persons data to file
+                CreateTheCsvFile(burstedFilePath, sb.ToString());
+            }
+        }
+
+        private static  void CreateTheCsvFile(string fileName,string data)
+        {
+            using (StreamWriter sw = new StreamWriter(fileName, false, Encoding.UTF8))
+            {
+                if (!File.Exists(fileName))
+                {
+                    File.Create(fileName);
+                }                
+                sw.WriteLine(data);
+            }
         }
     }
 }

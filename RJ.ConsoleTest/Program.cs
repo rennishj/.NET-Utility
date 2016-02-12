@@ -14,7 +14,12 @@ namespace RJ.ConsoleTest
         {
             try
             {
-                CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");                
+                //CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");        
+                CsvHelper.ReportBurstFiles(@"C:\Test\Reports.csv", "|");
+                //for (int i = 0; i < 5; i++)
+                //{
+                //    Console.WriteLine(DateTime.Now.ToString("ddMMyyyyhhmmsstt"));
+                //}
             }
             catch (Exception ex)
             {

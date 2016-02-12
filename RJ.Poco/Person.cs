@@ -12,8 +12,9 @@ namespace RJ.Poco
         [CsvIgnore]
         public int PersonId { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }        
-        [CsvIgnore]
+        public string LastName { get; set; }
+        public string Email { get; set; }   
+        //[CsvIgnore]
         public string ZipCode { get; set; }
     }
 }
