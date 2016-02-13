@@ -234,7 +234,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="NetUtilityEntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NetUtilityEntities" annotation:LazyLoadingEnabled="false">
           <EntitySet Name="ExternalUsers" EntityType="Self.ExternalUser" />
           <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
           <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemType" />
@@ -263,7 +263,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NetUtilityModelStoreContainer" CdmEntityContainer="NetUtilityEntities2">
+        <EntityContainerMapping StorageEntityContainer="NetUtilityModelStoreContainer" CdmEntityContainer="NetUtilityEntities">
           <EntitySetMapping Name="ExternalUsers">
             <EntityTypeMapping TypeName="NetUtilityModel.ExternalUser">
               <MappingFragment StoreEntitySet="ExternalUser">

@@ -13,11 +13,12 @@ namespace RJ.DAL.EF6
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NetUtilityEntities2 : DbContext
+    public partial class NetUtilityEntities : DbContext
     {
-        public NetUtilityEntities2()
-            : base("name=NetUtilityEntities2")
+        public NetUtilityEntities()
+            : base("name=NetUtilityEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
