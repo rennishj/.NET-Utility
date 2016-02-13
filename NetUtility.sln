@@ -28,6 +28,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{C911046C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScripts", "SqlScripts", "{1135AAA0-D76D-427C-B2B2-5BCFC7717219}"
 	ProjectSection(SolutionItems) = preProject
+		InsertSampleData.sql = InsertSampleData.sql
 		..\..\..\WebAPI\NetUtilityScripts.sql = ..\..\..\WebAPI\NetUtilityScripts.sql
 	EndProjectSection
 EndProject

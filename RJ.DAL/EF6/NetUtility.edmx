@@ -1,0 +1,344 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="NetUtilityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ExternalUser">
+          <Key>
+            <PropertyRef Name="ExternalUserId" />
+          </Key>
+          <Property Name="ExternalUserId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="PartnerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="DisplayName" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="25" Nullable="false" />
+          <Property Name="MenuItemTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MenuItemType">
+          <Key>
+            <PropertyRef Name="MenuItemTypeId" />
+          </Key>
+          <Property Name="MenuItemTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PartnerLinks">
+          <Key>
+            <PropertyRef Name="LinkId" />
+          </Key>
+          <Property Name="LinkId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisaplyName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Url" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PartnerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Partners">
+          <Key>
+            <PropertyRef Name="PartnerId" />
+          </Key>
+          <Property Name="PartnerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ExternalUser_PartnerId">
+          <End Role="Partners" Type="Self.Partners" Multiplicity="1" />
+          <End Role="ExternalUser" Type="Self.ExternalUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners">
+              <PropertyRef Name="PartnerId" />
+            </Principal>
+            <Dependent Role="ExternalUser">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExternalUser_UserId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ExternalUser" Type="Self.ExternalUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ExternalUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_MenuItemTypeId">
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItemType">
+              <PropertyRef Name="MenuItemTypeId" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="MenuItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerLinks_PartnerId">
+          <End Role="Partners" Type="Self.Partners" Multiplicity="1" />
+          <End Role="PartnerLinks" Type="Self.PartnerLinks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners">
+              <PropertyRef Name="PartnerId" />
+            </Principal>
+            <Dependent Role="PartnerLinks">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetUtilityModelStoreContainer">
+          <EntitySet Name="ExternalUser" EntityType="Self.ExternalUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItem" EntityType="Self.MenuItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MenuItemType" EntityType="Self.MenuItemType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PartnerLinks" EntityType="Self.PartnerLinks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Partners" EntityType="Self.Partners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_ExternalUser_PartnerId" Association="Self.FK_ExternalUser_PartnerId">
+            <End Role="Partners" EntitySet="Partners" />
+            <End Role="ExternalUser" EntitySet="ExternalUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExternalUser_UserId" Association="Self.FK_ExternalUser_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExternalUser" EntitySet="ExternalUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_MenuItemTypeId" Association="Self.FK_MenuItem_MenuItemTypeId">
+            <End Role="MenuItemType" EntitySet="MenuItemType" />
+            <End Role="MenuItem" EntitySet="MenuItem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerLinks_PartnerId" Association="Self.FK_PartnerLinks_PartnerId">
+            <End Role="Partners" EntitySet="Partners" />
+            <End Role="PartnerLinks" EntitySet="PartnerLinks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NetUtilityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ExternalUser">
+          <Key>
+            <PropertyRef Name="ExternalUserId" />
+          </Key>
+          <Property Name="ExternalUserId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="PartnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Partner" Relationship="Self.FK_ExternalUser_PartnerId" FromRole="ExternalUser" ToRole="Partners" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ExternalUser_UserId" FromRole="ExternalUser" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="MenuItem">
+          <Key>
+            <PropertyRef Name="MenuItemId" />
+          </Key>
+          <Property Name="MenuItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="DisplayName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MenuItemTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MenuItemType" Relationship="Self.FK_MenuItem_MenuItemTypeId" FromRole="MenuItem" ToRole="MenuItemType" />
+        </EntityType>
+        <EntityType Name="MenuItemType">
+          <Key>
+            <PropertyRef Name="MenuItemTypeId" />
+          </Key>
+          <Property Name="MenuItemTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="MenuItems" Relationship="Self.FK_MenuItem_MenuItemTypeId" FromRole="MenuItemType" ToRole="MenuItem" />
+        </EntityType>
+        <EntityType Name="PartnerLink">
+          <Key>
+            <PropertyRef Name="LinkId" />
+          </Key>
+          <Property Name="LinkId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisaplyName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Url" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PartnerId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Partner" Relationship="Self.FK_PartnerLinks_PartnerId" FromRole="PartnerLinks" ToRole="Partners" />
+        </EntityType>
+        <EntityType Name="Partner">
+          <Key>
+            <PropertyRef Name="PartnerId" />
+          </Key>
+          <Property Name="PartnerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ExternalUsers" Relationship="Self.FK_ExternalUser_PartnerId" FromRole="Partners" ToRole="ExternalUser" />
+          <NavigationProperty Name="PartnerLinks" Relationship="Self.FK_PartnerLinks_PartnerId" FromRole="Partners" ToRole="PartnerLinks" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ExternalUsers" Relationship="Self.FK_ExternalUser_UserId" FromRole="Users" ToRole="ExternalUser" />
+        </EntityType>
+        <Association Name="FK_ExternalUser_PartnerId">
+          <End Role="Partners" Type="Self.Partner" Multiplicity="1" />
+          <End Role="ExternalUser" Type="Self.ExternalUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners">
+              <PropertyRef Name="PartnerId" />
+            </Principal>
+            <Dependent Role="ExternalUser">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExternalUser_UserId">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ExternalUser" Type="Self.ExternalUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ExternalUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MenuItem_MenuItemTypeId">
+          <End Role="MenuItemType" Type="Self.MenuItemType" Multiplicity="1" />
+          <End Role="MenuItem" Type="Self.MenuItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MenuItemType">
+              <PropertyRef Name="MenuItemTypeId" />
+            </Principal>
+            <Dependent Role="MenuItem">
+              <PropertyRef Name="MenuItemTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PartnerLinks_PartnerId">
+          <End Role="Partners" Type="Self.Partner" Multiplicity="1" />
+          <End Role="PartnerLinks" Type="Self.PartnerLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partners">
+              <PropertyRef Name="PartnerId" />
+            </Principal>
+            <Dependent Role="PartnerLinks">
+              <PropertyRef Name="PartnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="NetUtilityEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ExternalUsers" EntityType="Self.ExternalUser" />
+          <EntitySet Name="MenuItems" EntityType="Self.MenuItem" />
+          <EntitySet Name="MenuItemTypes" EntityType="Self.MenuItemType" />
+          <EntitySet Name="PartnerLinks" EntityType="Self.PartnerLink" />
+          <EntitySet Name="Partners" EntityType="Self.Partner" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_ExternalUser_PartnerId" Association="Self.FK_ExternalUser_PartnerId">
+            <End Role="Partners" EntitySet="Partners" />
+            <End Role="ExternalUser" EntitySet="ExternalUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExternalUser_UserId" Association="Self.FK_ExternalUser_UserId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ExternalUser" EntitySet="ExternalUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MenuItem_MenuItemTypeId" Association="Self.FK_MenuItem_MenuItemTypeId">
+            <End Role="MenuItemType" EntitySet="MenuItemTypes" />
+            <End Role="MenuItem" EntitySet="MenuItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PartnerLinks_PartnerId" Association="Self.FK_PartnerLinks_PartnerId">
+            <End Role="Partners" EntitySet="Partners" />
+            <End Role="PartnerLinks" EntitySet="PartnerLinks" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NetUtilityModelStoreContainer" CdmEntityContainer="NetUtilityEntities2">
+          <EntitySetMapping Name="ExternalUsers">
+            <EntityTypeMapping TypeName="NetUtilityModel.ExternalUser">
+              <MappingFragment StoreEntitySet="ExternalUser">
+                <ScalarProperty Name="ExternalUserId" ColumnName="ExternalUserId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItems">
+            <EntityTypeMapping TypeName="NetUtilityModel.MenuItem">
+              <MappingFragment StoreEntitySet="MenuItem">
+                <ScalarProperty Name="MenuItemId" ColumnName="MenuItemId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="MenuItemTypeId" ColumnName="MenuItemTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MenuItemTypes">
+            <EntityTypeMapping TypeName="NetUtilityModel.MenuItemType">
+              <MappingFragment StoreEntitySet="MenuItemType">
+                <ScalarProperty Name="MenuItemTypeId" ColumnName="MenuItemTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PartnerLinks">
+            <EntityTypeMapping TypeName="NetUtilityModel.PartnerLink">
+              <MappingFragment StoreEntitySet="PartnerLinks">
+                <ScalarProperty Name="LinkId" ColumnName="LinkId" />
+                <ScalarProperty Name="DisaplyName" ColumnName="DisaplyName" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Partners">
+            <EntityTypeMapping TypeName="NetUtilityModel.Partner">
+              <MappingFragment StoreEntitySet="Partners">
+                <ScalarProperty Name="PartnerId" ColumnName="PartnerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="NetUtilityModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

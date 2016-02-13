@@ -1,0 +1,3 @@
+﻿1.For customizing the Database the EF6 code generation(For database first approach),read this blog
+https://www.simple-talk.com/dotnet/.net-framework/using-entity-framework-with-an-existing-database-data-access/
+2.You have to follow this link
