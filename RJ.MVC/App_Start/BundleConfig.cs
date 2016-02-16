@@ -26,6 +26,14 @@ namespace RJ.MVC
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            #region app scripts
+
+            bundles.Add(new ScriptBundle("~/bundles/app").Include(
+
+                "~/Scripts/app/contactUs.js"));
+
+            #endregion
         }
     }
 }

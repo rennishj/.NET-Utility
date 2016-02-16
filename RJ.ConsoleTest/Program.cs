@@ -15,18 +15,8 @@ namespace RJ.ConsoleTest
         {
             try
             {
-                //CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");        
-                //CsvHelper.ReportBurstFiles(@"C:\Test\Reports.csv", "|");
-                //for (int i = 0; i < 5; i++)
-                //{
-                //    Console.WriteLine(DateTime.Now.ToString("ddMMyyyyhhmmsstt"));
-                //}
-                //var result = new MenuItemsService().MenuItemReadAll();
-                //foreach (var item in result)
-                //{
-                //    Console.WriteLine(item);
-                //}
-
+                //CsvHelper();
+                
                 //PalindromeTest();
                 TestRecusrion();
                 
@@ -44,6 +34,16 @@ namespace RJ.ConsoleTest
             //Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
 
+        }
+
+        private static void CsvHelperMethod()
+        {
+            CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv", "|");
+            CsvHelper.ReportBurstFiles(@"C:\Test\Reports.csv", "|");
+            for (int i = 0; i < 5; i++)
+            {
+                Console.WriteLine(DateTime.Now.ToString("ddMMyyyyhhmmsstt"));
+            }
         }
 
         private static void TestRecusrion()

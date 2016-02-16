@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Contact", "ContactUs", "ContactUs",null, new { @class = "modal-link"})</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -35,10 +35,17 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
-    </div>
-
+    </div>    
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
+    <div id="modal-container" class="modal fade" role="dialog" tabindex="-1" style="border:5px solid #3A87AD;width:500px;height:300px;">
+        <a href="#close" title="close" class="modal-close-btn">X</a>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="width:500px !important;margin:10px auto !important;"></div>
+            <div class="modal-body"></div>            
+        </div>
+    </div>
 </body>
 </html>
