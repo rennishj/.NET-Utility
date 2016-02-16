@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Attributes\CustomAttributes.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="MenuItem.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

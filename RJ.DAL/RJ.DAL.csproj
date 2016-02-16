@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Dapper, Version=1.40.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.1.42\lib\net45\Dapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -40,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -50,61 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConnectionHelper\ConnectionHelper.cs" />
     <Compile Include="DAL\MenuAccess.cs" />
-    <Compile Include="EF6\ExternalUser.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\MenuItem.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\MenuItemType.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\NetUtility.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NetUtility.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\NetUtility.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\NetUtility.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NetUtility.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\Partner.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\PartnerLink.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF6\User.cs">
-      <DependentUpon>NetUtility.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <EntityDeploy Include="EF6\NetUtility.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>NetUtility.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="EF6\NetUtility.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NetUtility.edmx</DependentUpon>
-      <LastGenOutput>NetUtility.Context.cs</LastGenOutput>
-    </None>
-    <None Include="EF6\NetUtility.edmx.diagram">
-      <DependentUpon>NetUtility.edmx</DependentUpon>
-    </None>
-    <None Include="EF6\NetUtility.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>NetUtility.edmx</DependentUpon>
-      <LastGenOutput>NetUtility.cs</LastGenOutput>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +67,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="EFDevNotes\EF6DevNotes.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EF6\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\RJ.Poco\RJ.Poco.csproj">
+      <Project>{aaa8c731-fea6-45d6-946d-93f3c5287812}</Project>
+      <Name>RJ.Poco</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

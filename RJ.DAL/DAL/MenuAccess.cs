@@ -3,20 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RJ.DAL.EF6;
+using Dapper;
+using System.Data.SqlClient;
+using RJ.Poco;
 
 namespace RJ.DAL
 {
    public class MenuAccess
     {
-       public NetUtilityEntities2 Context
+       public SqlConnection Connection
        {
-           get { return new NetUtilityEntities2(); }
-       }
-       public List<MenuItem> GetAllMenuItems()
+           get
+           {
+               return ConnectionHelper.ConnectionHelper.GetConnectionString();
+           }
+       }       
+       public async Task<List<MenuItem>> GetAllMenuItems()
        {
-           var menuITems =  Context.MenuItems.ToList();
-           return menuITems;
+           using (var con = this.Connection)
+           {
+               await con.OpenAsync();
+               var menuItems = await con.QueryAsync<MenuItem>("select MenuITemId,ParentId,DisplayName,Url,MenuItemTypeId from dbo.MenuItem");
+               return menuItems.ToList();
+           }
        }
     }
 }

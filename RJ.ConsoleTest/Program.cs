@@ -1,4 +1,5 @@
-﻿using RJ.Poco;
+﻿using RJ.BLL;
+using RJ.Poco;
 using RJ.Utils;
 using System;
 using System.Collections.Generic;
@@ -15,21 +16,65 @@ namespace RJ.ConsoleTest
             try
             {
                 //CsvHelper.WriteCsv<Person>(GetPersons(), @"C:\Test\Person.csv","|");        
-                CsvHelper.ReportBurstFiles(@"C:\Test\Reports.csv", "|");
+                //CsvHelper.ReportBurstFiles(@"C:\Test\Reports.csv", "|");
                 //for (int i = 0; i < 5; i++)
                 //{
                 //    Console.WriteLine(DateTime.Now.ToString("ddMMyyyyhhmmsstt"));
                 //}
+                //var result = new MenuItemsService().MenuItemReadAll();
+                //foreach (var item in result)
+                //{
+                //    Console.WriteLine(item);
+                //}
+
+                //PalindromeTest();
+                TestRecusrion();
+                
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine("Hit enter to Reprocess ");
+                var result = Console.ReadLine();
+                if (result == "1")
+                {
+                    TestRecusrion();
+                }
             }
-            Console.WriteLine("Finished wrting to the file");
+            //Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
 
         }
 
+        private static void TestRecusrion()
+        {
+            var meItems = new MenuItemsService().MenuItemReadAll().Result;
+            foreach (var item in meItems)
+            {
+                Console.WriteLine("{0} {1} {2}", item.ParentId, item.DisplayName, item.Url);
+            }
+        }
+
+        private static void PalindromeTest()
+        {
+            Console.WriteLine("Enter the word");
+            string val = Console.ReadLine();
+            Console.WriteLine(IsPalindrome(val));
+        }
+
+        public static  bool IsPalindrome(string word)
+        {
+            //first reverse the string
+            string reversedString = new string(word.Reverse().ToArray());
+            return string.Compare(word, reversedString) == 0 ? true : false;
+        }
+
+        private static string ReverseString(string str)
+        {
+            char[] charArray = str.ToCharArray();
+            Array.Reverse(charArray);
+            return new string(charArray);
+        }
         private static void TestPolymorphism()
         {
             var shapes = new List<Shape>();
@@ -96,6 +141,7 @@ namespace RJ.ConsoleTest
         }
     }
 
+    
     #endregion
     
 }
