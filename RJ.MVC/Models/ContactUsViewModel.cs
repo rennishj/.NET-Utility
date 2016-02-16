@@ -8,11 +8,11 @@ namespace RJ.MVC.Models
 {
     public class ContactUsViewModel
     {
-        [Display(Name="First Name")]
+        [Display(Name = "First Name")]
         [Required(ErrorMessage = "First Name is required")]
         public String FirstName { get; set; }
 
-         [Display(Name = "Last Name")]
+        [Display(Name = "Last Name")]
         [Required(ErrorMessage = "Last Name is required")]
         public string LastName { get; set; }
 

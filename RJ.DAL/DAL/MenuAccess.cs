@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using System.Data.SqlClient;
 using RJ.Poco;
+using System.Data;
 
 namespace RJ.DAL
 {
@@ -23,7 +24,7 @@ namespace RJ.DAL
            using (var con = this.Connection)
            {
                await con.OpenAsync();
-               var menuItems = await con.QueryAsync<MenuItem>("select MenuITemId,ParentId,DisplayName,Url,MenuItemTypeId from dbo.MenuItem");
+               var menuItems = await con.QueryAsync<MenuItem>("dbo.MenuItemsReadAll", commandType: CommandType.StoredProcedure);
                return menuItems.ToList();
            }
        }

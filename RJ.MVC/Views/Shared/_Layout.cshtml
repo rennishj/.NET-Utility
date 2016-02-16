@@ -23,7 +23,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "ContactUs", "ContactUs",null, new { @class = "modal-link"})</li>
+                    <li>@Html.ActionLink("Contact", "ContactUs", "ContactUs", null, new { @class = "modal-link", title = "Contact Us", data_target = "modal-container",data_toggle="modal" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -40,11 +40,17 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/app")
     @RenderSection("scripts", required: false)
-    <div id="modal-container" class="modal fade" role="dialog" tabindex="-1" style="border:5px solid #3A87AD;width:500px;height:300px;">
+    <div id="modal-container" class="modal fade" role="dialog" tabindex="-1">
         <a href="#close" title="close" class="modal-close-btn">X</a>
         <div class="modal-dialog" role="document">
-            <div class="modal-content" style="width:500px !important;margin:10px auto !important;"></div>
-            <div class="modal-body"></div>            
+            <div class="modal-content"> 
+                <div class="modal-header text-center"></div>               
+                <div class="modal-body">
+                </div>     
+                <div class="modal-footer">
+
+                </div>           
+            </div>     
         </div>
     </div>
 </body>
