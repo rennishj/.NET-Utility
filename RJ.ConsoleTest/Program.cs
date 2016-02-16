@@ -56,7 +56,12 @@ namespace RJ.ConsoleTest
               }}
             };
 
-            var packageItemIds = orders.SelectMany(o => o.Packages).SelectMany(p => p.Items).Where(pi => pi.Qty > 0 && pi.Size.ToLower().Equals("xl")).Select(pki => pki.PackageItemId).Distinct().ToList();
+            var packageItemIds = orders.SelectMany(o => o.Packages)
+                                        .SelectMany(p => p.Items)
+                                        .Where(pi => pi.Qty > 0 && pi.Size.ToLower().Equals("xl"))
+                                        .Select(pki => pki.PackageItemId)
+                                        .Distinct()
+                                        .ToList();
             foreach (var item in packageItemIds)
             {
                 Console.WriteLine(item);
