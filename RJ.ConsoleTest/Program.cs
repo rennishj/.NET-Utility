@@ -18,7 +18,8 @@ namespace RJ.ConsoleTest
                 //CsvHelper();
                 
                 //PalindromeTest();
-                TestRecusrion();
+                //TestRecusrion();
+                TestSelectMany();
                 
             }
             catch (Exception ex)
@@ -34,6 +35,32 @@ namespace RJ.ConsoleTest
             //Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
 
+        }
+
+        private static void TestSelectMany()
+        {
+
+            var orders = new List<Order>
+            {
+              new Order{OrderId = 1,Packages = new List<Package>()
+              {
+                new Package{PackageId = 1,OrderId = 1,ShipDate = new DateTime(2015,12,31),
+                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 1,PackageId = 1,Qty = 10,Size = "SM"},
+                                                             new PackageItems{PackageItemId = 2,PackageId = 2,Qty = 10,Size = "XL"}}},
+                new Package{PackageId = 2,OrderId = 1,ShipDate = new DateTime(2015,12,25),
+                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 3,PackageId = 1,Qty = 10,Size = "SM"},
+                                                             new PackageItems{PackageItemId = 4,PackageId = 2,Qty = 10,Size = "XL"}}},
+                new Package{PackageId = 3,OrderId = 1,ShipDate = new DateTime(2016,02,10),
+                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 5,PackageId = 1,Qty = 10,Size = "SM"},
+                                                             new PackageItems{PackageItemId = 6,PackageId = 2,Qty = 10,Size = "XL"}}}
+              }}
+            };
+
+            var packageItemIds = orders.SelectMany(o => o.Packages).SelectMany(p => p.Items).Where(pi => pi.Qty > 0 && pi.Size.ToLower().Equals("xl")).Select(pki => pki.PackageItemId).Distinct().ToList();
+            foreach (var item in packageItemIds)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private static void CsvHelperMethod()
@@ -140,7 +167,6 @@ namespace RJ.ConsoleTest
             base.Draw();
         }
     }
-
     
     #endregion
     
