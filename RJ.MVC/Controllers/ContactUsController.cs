@@ -20,9 +20,9 @@ namespace RJ.MVC.Controllers
         [HttpPost]
         public ActionResult ContactUs(ContactUsViewModel model)
         {
-            if (ModelState.IsValid)
-            { 
-                
+            if (!ModelState.IsValid)
+            {
+                return PartialView(model);
             }
             return null;
         }

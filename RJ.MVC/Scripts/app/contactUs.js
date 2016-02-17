@@ -1,16 +1,18 @@
 ﻿$(function () {
-    //https://codemagik.wordpress.com/2015/04/07/render-mvc-partial-view-inside-bootstrap-modal-dialog/ refer to this for getting this to work
-    $('body').on('click', '.modal-link', function (e) {        
-        e.preventDefault();        
-    })
+    
 
-    $('body').on('click', '#cancelbtn', function () {
-        $('#modal-container').modal('close');
+    //$('body').on('click', '#cancelbtn', function () {
+    //    $('#modal-container').modal('close');
+    //})
+
+    //This code is important.This is the one actually telling the validator to parse the form
+    $('#modal-container').on('shown.bs.modal', function () {
+        $.validator.unobtrusive.parse($('#form-contact'));
     })
 
     $('#modal-container').on('hidden.bs.modal', function () {
         $(this).removeData('bs.modal');
-    })
+    }) 
 
     //$('#cancelbtn').on('click', function () {
     //    $('input').val(' ');        
@@ -25,11 +27,11 @@
             $('#modal-container').modal('show');            
         });
     })
-    $('.btn-primary').on('click', function () {
-        $.validator.unobtrusive.parse('form-contact');
-        $('#form-contact').validate();
-        return false;
-    });
+    //$('.btn-primary').on('click', function () {
+    //    $.validator.unobtrusive.parse('form-contact');
+    //    $('#form-contact').validate();
+    //    return false;
+    //});
 
     $('#form-contact').submit(function () {
         createContact();
@@ -38,5 +40,6 @@
 
     function createContact() {
 
-    }  
+    }
+    
 })

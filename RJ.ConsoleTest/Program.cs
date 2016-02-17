@@ -20,14 +20,7 @@ namespace RJ.ConsoleTest
                 //PalindromeTest();
                 //TestRecusrion();
                 //TestSelectMany();
-                Console.WriteLine("Please enter a number");
-                int number = Convert.ToInt32(Console.ReadLine());
-                var fib = PrintFibonacciRecursively(number);
-                foreach (var item in fib)
-                {
-                    Console.WriteLine(item);  
-                }
-                             
+                InvokeFibonacciNumbers();          
             }
             catch (Exception ex)
             {
@@ -41,6 +34,18 @@ namespace RJ.ConsoleTest
             }
             //Console.WriteLine("Finished wrting to the file");
             Console.ReadKey();
+
+        }
+
+        private static void InvokeFibonacciNumbers()
+        {
+            Console.WriteLine("Please enter a number");
+            int number = Convert.ToInt32(Console.ReadLine());
+            var fib = PrintFibonacci(number);
+            foreach (var item in fib)
+            {
+                Console.WriteLine(item);
+            }
 
         }
 
