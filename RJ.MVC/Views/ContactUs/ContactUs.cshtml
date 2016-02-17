@@ -1,12 +1,14 @@
 ﻿
 @model RJ.MVC.Models.ContactUsViewModel
-@using (Html.BeginForm("ContactUs", "ContactUs", FormMethod.Post))
+@using (Html.BeginForm("ContactUs", "ContactUs", FormMethod.Post, new { id="form-contact"}))
 {
+    @Html.ValidationSummary(true)
     <div class="container">
         <div class="form-group">
             <div class="col-md-12">
                 @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.FirstName)
             </div>            
         </div>
         <div class="form-group">
@@ -36,4 +38,8 @@
         </div>        
     </div>
     
+}
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryunobtrusive")
 }

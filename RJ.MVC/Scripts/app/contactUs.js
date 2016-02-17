@@ -1,8 +1,7 @@
 ﻿$(function () {
     //https://codemagik.wordpress.com/2015/04/07/render-mvc-partial-view-inside-bootstrap-modal-dialog/ refer to this for getting this to work
     $('body').on('click', '.modal-link', function (e) {        
-        e.preventDefault();
-        
+        e.preventDefault();        
     })
 
     $('body').on('click', '#cancelbtn', function () {
@@ -23,7 +22,21 @@
         $.get(url, function (data) {
             $('.modal-header').html('<h2>Contact Us</h2>');
             $('.modal-body').html(data);
-            $('#modal-container').modal('show');
+            $('#modal-container').modal('show');            
         });
     })
+    $('.btn-primary').on('click', function () {
+        $.validator.unobtrusive.parse('form-contact');
+        $('#form-contact').validate();
+        return false;
+    });
+
+    $('#form-contact').submit(function () {
+        createContact();
+        return false;
+    });
+
+    function createContact() {
+
+    }  
 })

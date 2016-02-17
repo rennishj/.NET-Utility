@@ -184,6 +184,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\app\common.js" />
     <Content Include="Scripts\app\contactUs.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -257,6 +258,10 @@
     <ProjectReference Include="..\RJ.BLL\RJ.BLL.csproj">
       <Project>{1226ec80-4a65-4f51-9acb-00fa20026826}</Project>
       <Name>RJ.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RJ.Poco\RJ.Poco.csproj">
+      <Project>{aaa8c731-fea6-45d6-946d-93f3c5287812}</Project>
+      <Name>RJ.Poco</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -18,8 +18,8 @@ namespace RJ.ConsoleTest
                 //CsvHelper();
                 
                 //PalindromeTest();
-                //TestRecusrion();
-                TestSelectMany();
+                TestRecusrion();
+                //TestSelectMany();
                 
             }
             catch (Exception ex)

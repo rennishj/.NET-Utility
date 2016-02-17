@@ -21,12 +21,21 @@ namespace RJ.DAL
        }       
        public async Task<List<MenuItem>> GetAllMenuItems()
        {
-           using (var con = this.Connection)
+           try
            {
-               await con.OpenAsync();
-               var menuItems = await con.QueryAsync<MenuItem>("dbo.MenuItemsReadAll", commandType: CommandType.StoredProcedure);
-               return menuItems.ToList();
+               using (var con = this.Connection)
+               {
+                   await con.OpenAsync();
+                   var menuItems = await con.QueryAsync<MenuItem>("dbo.MenuItemsReadAll", commandType: CommandType.StoredProcedure);
+                   return menuItems.ToList();
+               }
            }
+           catch (Exception ex)
+           {
+
+               throw;
+           }
+           
        }
     }
 }

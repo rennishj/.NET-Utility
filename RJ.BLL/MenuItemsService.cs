@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Runtime.Caching;
 
 namespace RJ.BLL
 {
@@ -14,9 +15,14 @@ namespace RJ.BLL
         public MenuAccess DAL { get { return new MenuAccess(); } }
 
         public async Task<List<MenuItem>> MenuItemReadAll()
-        {
-            var menuItems =  await DAL.GetAllMenuItems();            
-            SetParentChildRelationShip(menuItems, null);
+        {           
+            List<MenuItem> menuItems = CacheService.Get("menuitems") as List<MenuItem>;
+            if (menuItems == null)
+            {
+                menuItems = await DAL.GetAllMenuItems();
+                SetParentChildRelationShip(menuItems, null);
+                CacheService.Put(menuItems,"menuitems", new CacheItemPolicy { AbsoluteExpiration = DateTime.Now.AddMinutes(10), Priority = CacheItemPriority.Default });
+            }            
             return menuItems;
         }
 
