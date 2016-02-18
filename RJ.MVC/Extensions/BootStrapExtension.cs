@@ -44,21 +44,33 @@ namespace RJ.MVC.Extensions
             var regEx = model.GetAttributeFrom<RegularExpressionAttribute>(fieldName);
             var displayFormat = model.GetAttributeFrom<DisplayFormatAttribute>(fieldName);
 
+            var hasRequired = required != null;
             var errorMessage = BuildErrorMessage(required,email);
             //Need to revist this
+            var sb = new StringBuilder();
             var formattedFieldValue = displayFormat != null ? string.Format(displayFormat.DataFormatString,fieldValueExact) : fieldValue;
             string formatString = null;
             switch(inputType)
             {
                 case HtmlInputType.Text:
-                    formatString = includeLabel ? "<label class='control-label' for='{0}'>{1}</label><input class='form-control'></input>": null;
+                    formatString = hasRequired ? "<label class='control-label' for='{0}'>{1}</label><input class='form-control' type='{4}'{3} {2} {5} /><span class='field-validation-valid' {6} {7}><span {8} {9}></span></span>": null;
+                    sb.AppendFormat(formatString,
+                        /*0 fieldName*/ fieldName,
+                        /*1 fieldName*/ fieldName,                                  
+                        /*2 data-val*/ hasRequired ?  string.Format("{0}='{1}'","data-val",true) : null,
+                        /*3 data-val-required*/  hasRequired ? string.Format("{0}='{1}'","data-val-required",errorMessage) : null,
+                        /*4 type*/ Enum.GetName(typeof(HtmlInputType),inputType).ToString().ToLower(),
+                        /*5*/ propertyBuilder.ToString(),
+                        /*6*/hasRequired ? string.Format("{0}='{1}'","data-valmsg-for",fieldName) : null,
+                        /*7*/hasRequired ? string.Format("{0}='{1}'","data-valmsg-replace",fieldName,true) : null
+                        );
                     break;
 
                 
             }
             //Add ur stuff
             var hasValidation = required != null || email != null;
-            return null;
+            return new HtmlString(sb.ToString());
         }
 
         private static T GetAttributeFrom<T>(this object instance, string propertyName) where T : Attribute

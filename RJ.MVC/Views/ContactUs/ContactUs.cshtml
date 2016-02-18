@@ -1,4 +1,4 @@
-﻿
+﻿@using RJ.MVC.Extensions
 @model RJ.MVC.Models.ContactUsViewModel
 @using (Html.BeginForm("ContactUs", "ContactUs", FormMethod.Post, new { id="form-contact"}))
 {
@@ -9,6 +9,7 @@
                 @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
                 @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
                 @Html.ValidationMessageFor(m => m.FirstName)
+                @*@Html.BSInputFor(m => m.FirstName, HtmlInputType.Text, null, new {name="FirstName",id="FirstName"})*@
             </div>            
         </div>
         <div class="form-group">
