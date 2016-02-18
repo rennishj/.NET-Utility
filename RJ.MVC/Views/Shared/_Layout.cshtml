@@ -22,6 +22,7 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <li>@Html.ActionLink("Download Excel", "Export", "Excel")</li>
                     <li>@Html.ActionLink("Contact", "ContactUs", "ContactUs", null, new { @class = "modal-link", title = "Contact Us", data_target = "modal-container",data_toggle="modal" })</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
