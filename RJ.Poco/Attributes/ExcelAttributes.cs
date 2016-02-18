@@ -9,6 +9,7 @@ namespace RJ.Poco.Attributes
     /// <summary>
     /// These are the attributes we should look out for while iterating through the object
     /// </summary>
+    [AttributeUsage(AttributeTargets.Property,AllowMultiple = false,Inherited = false)]
    public class ExcelHeaderAttribute : Attribute
     {
         public string Name { get; set; }
@@ -18,6 +19,7 @@ namespace RJ.Poco.Attributes
        }
     }
 
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
    public class ExcelColumnOrderAttribute : Attribute
    {
        public int ColumnOrder { get; set; }
@@ -27,6 +29,7 @@ namespace RJ.Poco.Attributes
        }
    }
 
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
    public class ExcelFormatAttribute : Attribute
    {
        public string Format { get; set; }

@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using RJ.Utils;
 using RJ.Poco;
 using System.IO;
+using RJ.MVC.Models;
 
 namespace RJ.MVC.Controllers
 {
@@ -15,16 +16,22 @@ namespace RJ.MVC.Controllers
         {
             try
             {
-                var stream = ExcelHelper.CreateExcelPackage(GetAllPersons());                
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment; filename=ExcelDemo.xlsx");
-                Response.BinaryWrite(((MemoryStream)stream).ToArray());
+                var data = ExcelHelper.CreateExcel<Person>(GetAllPersons()).GetAsByteArray();
+                var vm = new ExcelViewModel
+                {                   
+                    Data = data,
+                    FileName = string.Format("ExcelDownLoad{0:MMddyy_hhmmss}.xlsx",DateTime.Now)
+                };
+                return File(vm.Data, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", vm.FileName);
+                //Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                //Response.AddHeader("content-disposition", "attachment; filename=ExcelDemo.xlsx");
+                //Response.BinaryWrite(((MemoryStream)stream).ToArray());
             }
             catch (Exception ex)
             {
                 throw ex;
             }            
-            return View();
+            
         }
 
         private List<Person> GetAllPersons()
