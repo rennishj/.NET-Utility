@@ -17,7 +17,7 @@ namespace RJ.Utils
     /// </summary>
     public class ExcelHelper
     {
-        public static Stream CreateExcelPackage<T>(IEnumerable<T> data)
+        public static Stream CreateExcelPackage<T>(List<T> data)
         {
             //iterate through the object and check for ExcelHeader,Column Order attribute and 
             using (ExcelPackage ep = new ExcelPackage(new MemoryStream()))
@@ -34,16 +34,43 @@ namespace RJ.Utils
 
         }
 
-        public static ExcelPackage CreateExcel<T>(IEnumerable<T> data)
+        public static ExcelPackage CreateExcel<T>(List<T> data)
         {
-            return null;
+            List<ColumnInfo> info = BuildColumnInfo(typeof(T));
+            if (info == null || info.Count == 0)
+            {
+                return null;
+            }
+            BuildColumnNumber(info);
+            ExcelPackage ep = new ExcelPackage();
+            ExcelWorksheet ws = ep.Workbook.Worksheets.Add("ExcelExport");
+            BuildExcelHeader(ws, 1, info);
+            WriteExcelData<T>(ws, 2, data, info);
+            return ep;
         }
 
-        private static List<FieldInfo> BuildFieldInfo(Type tpe)
+        private static void BuildColumnNumber(List<ColumnInfo> info)
+        { 
+            //set up the coulumnnumber by checking the sortorder and if thats 0,setup as it appears on the object
+            int counter = 1;
+            foreach (var ci in info)
+            {
+                if (ci.DisplayOrder > 0)
+                {
+                    ci.ColumnNumber = ci.DisplayOrder;
+                }
+                else
+                {
+                    ci.ColumnNumber = counter;
+                }
+                counter++;
+            }
+        }
+        private static List<ColumnInfo> BuildColumnInfo(Type tpe)
         {
-            List<FieldInfo> retVal = new List<FieldInfo>();
+            List<ColumnInfo> retVal = new List<ColumnInfo>();
             var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelHeaderAttribute>() != null).ToList();
-            int fiCounter = 0;
+            int fieldNameCounter = 0;
             foreach (var pi in propertyInfos)
             {
                 var displayOrderAttribute = pi.GetCustomAttribute<ExcelColumnOrderAttribute>();
@@ -51,10 +78,9 @@ namespace RJ.Utils
                 var formatStringAttribute = pi.GetCustomAttribute<ExcelFormatAttribute>();
                 var typeCode  = Type.GetTypeCode(pi.PropertyType);
                 //To do : Check for Nullable Types
-                FieldInfo fi = new FieldInfo
+                ColumnInfo fi = new ColumnInfo
                 {
-                    NaturalOrder = fiCounter++,
-                    DisplayOrder = Int32.MaxValue
+                    NaturalOrder = fieldNameCounter++
                 };
                 switch (typeCode)
                 {                                    
@@ -83,28 +109,97 @@ namespace RJ.Utils
                     default:
                         continue;//Object types has to be flattened to the primitive types
                 }
-                fi.DisplayOrder = displayOrderAttribute != null ? displayOrderAttribute.ColumnOrder : Int32.MaxValue;
+                fi.DisplayOrder = displayOrderAttribute != null ? displayOrderAttribute.ColumnOrder : 0;
                 fi.HeaderName = headerNameAttribute != null ? headerNameAttribute.Name : pi.Name;
                 fi.FormatString = formatStringAttribute != null ? formatStringAttribute.Format : null;
                 retVal.Add(fi);
             }
             return retVal.OrderBy(o => o.DisplayOrder).ThenBy(o => o.NaturalOrder).ToList();
         }
+
+        private static void BuildExcelHeader(ExcelWorksheet ws,int row,List<ColumnInfo> columnInfos)
+        { 
+            foreach (var ci in columnInfos)
+	        {
+                ws.Cells[row, ci.ColumnNumber].Value = ci.HeaderName;
+                ws.Cells[row, ci.ColumnNumber].Style.Font.Bold = true;
+                ws.Cells[row, ci.ColumnNumber].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+	        }
+        }
+        private static void WriteExcelData<T>(ExcelWorksheet ws,int row,List<T> data,List<ColumnInfo> props)
+        {
+            foreach (var d in data)
+            {
+                WriteExcelRows(ws, row, data, props);
+                row++;
+            }
+        }
+
+        private static void WriteExcelRows<T>(ExcelWorksheet ws,int row,T data,List<ColumnInfo> props)
+        {
+            foreach (var ci in props)
+            {
+                object cellData = ci.Getter.GetValue(data);
+                if (cellData == null)
+                {
+                    cellData = "";
+                }
+                if (!string.IsNullOrWhiteSpace(ci.FormatString))
+                { 
+                    //Apply the format string to the cellData
+                    switch (ci.DataType)
+                    {
+                        case ExcelDataType.Number:
+                            ws.Cells[row, ci.ColumnNumber].Style.Numberformat.Format = ci.FormatString;
+                            ws.Cells[row, ci.ColumnNumber].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
+                            break;                        
+                        case ExcelDataType.DateTime:
+                            try
+                            {
+                                if(cellData != null)
+                                {
+                                   cellData =  ((DateTime)(cellData)).ToString(ci.FormatString);
+                                }
+                            }
+                            catch
+                            {
+                                cellData = "";                                
+                            }
+                            break;
+                        case ExcelDataType.Boolean:
+                            if (cellData == null || !((bool)cellData))
+                            {
+                                cellData = "False";
+                            }
+                            else
+                            {
+                              cellData = "True";
+                            }
+                            break;                        
+                    }
+                
+                }
+                ws.Cells[row, ci.ColumnNumber].Value = cellData;
+            }
+        }
+
     }
 
-    public class FieldInfo
+    public class ColumnInfo
     {
         public int DisplayOrder { get; set; }
         public string HeaderName { get; set; }
         public string FormatString { get; set; }
         public ExcelDataType DataType { get; set; }
         public int NaturalOrder { get; set; }
+        public int ColumnNumber { get; set; }
+        public PropertyInfo Getter { get; set; }
 
     }
 
     public enum ExcelDataType
     { 
-        Number = 1,
+        Number,
         String,
         DateTime,
         Boolean
