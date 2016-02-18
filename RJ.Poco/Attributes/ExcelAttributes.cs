@@ -38,4 +38,10 @@ namespace RJ.Poco.Attributes
            this.Format = format; 
        }
    }
+
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
+    public class ExcelIgnoreAttribute : Attribute
+    {
+        
+    }
 }

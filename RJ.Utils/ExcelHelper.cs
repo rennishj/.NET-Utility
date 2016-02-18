@@ -69,7 +69,7 @@ namespace RJ.Utils
         private static List<ColumnInfo> BuildColumnInfo(Type tpe)
         {
             List<ColumnInfo> retVal = new List<ColumnInfo>();
-            var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelHeaderAttribute>() != null).ToList();
+            var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelIgnoreAttribute>() != null).ToList();
             int fieldNameCounter = 0;
             foreach (var pi in propertyInfos)
             {

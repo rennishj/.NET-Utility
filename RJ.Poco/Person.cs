@@ -19,6 +19,8 @@ namespace RJ.Poco
         [ExcelColumnOrder(4)]
         public string Email { get; set; }
         [ExcelColumnOrder(5)]
-        public string ZipCode { get; set; }
+        public string ZipCode { get; set; }        
+        [ExcelHeader("Date Of Birth")]
+        public DateTime DOB { get; set; }
     }
 }
