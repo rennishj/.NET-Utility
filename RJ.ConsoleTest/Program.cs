@@ -20,7 +20,12 @@ namespace RJ.ConsoleTest
                 //PalindromeTest();
                 //TestRecusrion();
                 //TestSelectMany();
-                InvokeFibonacciNumbers();          
+                //InvokeFibonacciNumbers();       
+
+                RJ.ConsoleTest.DerivedC.NestedC c1 = new DerivedC.NestedC();
+                BaseC.NestedC c2 = new BaseC.NestedC();
+                Console.WriteLine(c1.x);
+                Console.WriteLine(c2.x);
             }
             catch (Exception ex)
             {
@@ -218,6 +223,27 @@ namespace RJ.ConsoleTest
             base.Draw();
         }
     }
+
+    public class BaseC
+    {
+        public class NestedC
+        {
+            public int x = 200;
+            public int y = 0;
+        }
+    }
+
+    public class DerivedC : BaseC
+    {
+        new public class NestedC
+        {
+            public int x = 1000;
+            public int y = 200;
+            public int z = 200;
+        }
+    
+    }
+
     
     #endregion
     

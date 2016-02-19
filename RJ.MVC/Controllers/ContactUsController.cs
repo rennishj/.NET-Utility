@@ -1,10 +1,6 @@
 ﻿using RJ.MVC.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Threading.Tasks;
+using RJ.MVC.Extensions;
 
 namespace RJ.MVC.Controllers
 {
@@ -14,7 +10,8 @@ namespace RJ.MVC.Controllers
         public ActionResult ContactUs()
         {
             var contactUs = new ContactUsViewModel();
-            return PartialView(contactUs);
+            
+           return PartialView(contactUs);
         }
 
         [HttpPost]

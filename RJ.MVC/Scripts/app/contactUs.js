@@ -1,6 +1,6 @@
 ﻿$(function () {
     
-
+    
     //$('body').on('click', '#cancelbtn', function () {
     //    $('#modal-container').modal('close');
     //})
@@ -8,6 +8,8 @@
     //This code is important.This is the one actually telling the validator to parse the form
     $('#modal-container').on('shown.bs.modal', function () {
         $.validator.unobtrusive.parse($('#form-contact'));
+        console.log($('#button-submit').text());
+        $('#button-submit').click(createContact);
     })
 
     $('#modal-container').on('hidden.bs.modal', function () {
@@ -32,14 +34,19 @@
     //    $('#form-contact').validate();
     //    return false;
     //});
-
-    $('#form-contact').submit(function () {
-        createContact();
-        return false;
-    });
-
     function createContact() {
-
+        var contactUs = {
+            firstName: $('#FirstName').val(),
+            lastName: $('#LastName').val(),
+            email: $('#Email').val(),
+            phone:$('#Phone').val()
+        }
+        RJ.ajaxForJson('/ContactUs/ContactUs', contactUs, success, error);
     }
+    function success(){
     
+    }
+    function error(){    
+    
+    }   
 })

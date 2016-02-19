@@ -35,7 +35,7 @@ namespace RJ.MVC
             #region app scripts
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-
+                "~/Scripts/app/common.js",
                 "~/Scripts/app/contactUs.js"));
 
             #endregion
