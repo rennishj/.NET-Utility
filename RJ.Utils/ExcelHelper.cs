@@ -71,22 +71,22 @@ namespace RJ.Utils
             List<ColumnInfo> retVal = new List<ColumnInfo>();
             var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelIgnoreAttribute>() == null).ToList();
             int fieldNameCounter = 0;
-            foreach (var pi in propertyInfos)
+            foreach (var propInfo in propertyInfos)
             {
-                var displayOrderAttribute = pi.GetCustomAttribute<ExcelColumnOrderAttribute>();
-                var headerNameAttribute = pi.GetCustomAttribute<ExcelHeaderAttribute>();
-                var formatStringAttribute = pi.GetCustomAttribute<ExcelFormatAttribute>();
-                var typeCode  = Type.GetTypeCode(pi.PropertyType);
-                if (pi.PropertyType.IsGenericType)
+                var displayOrderAttribute = propInfo.GetCustomAttribute<ExcelColumnOrderAttribute>();
+                var headerNameAttribute = propInfo.GetCustomAttribute<ExcelHeaderAttribute>();
+                var formatStringAttribute = propInfo.GetCustomAttribute<ExcelFormatAttribute>();
+                var typeCode  = Type.GetTypeCode(propInfo.PropertyType);
+                if (propInfo.PropertyType.IsGenericType)
                 {
-                    if (pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    if (propInfo.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
                     {
-                        typeCode = Type.GetTypeCode(pi.PropertyType.GetGenericArguments()[0]);
+                        typeCode = Type.GetTypeCode(propInfo.PropertyType.GetGenericArguments()[0]);
                     }
                     else
                         continue;
                 }
-                ColumnInfo ci = new ColumnInfo() { Getter = pi };
+                ColumnInfo ci = new ColumnInfo() { Getter = propInfo };
                 fieldNameCounter++;
                 switch (typeCode)
                 {                                    
@@ -116,7 +116,7 @@ namespace RJ.Utils
                         continue;//Object types has to be flattened to the primitive types
                 }
                 ci.DisplayOrder = displayOrderAttribute != null ? displayOrderAttribute.ColumnOrder : fieldNameCounter;
-                ci.HeaderName = headerNameAttribute != null ? headerNameAttribute.Name : pi.Name;
+                ci.HeaderName = headerNameAttribute != null ? headerNameAttribute.Name : propInfo.Name;
                 ci.FormatString = formatStringAttribute != null ? formatStringAttribute.Format : null;
                 ci.ColumnNumber = ci.DisplayOrder;
                 retVal.Add(ci);
