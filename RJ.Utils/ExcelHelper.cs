@@ -41,7 +41,7 @@ namespace RJ.Utils
             {
                 return null;
             }
-            BuildColumnNumber(info);
+            //BuildColumnNumber(info);
             ExcelPackage ep = new ExcelPackage();
             ExcelWorksheet ws = ep.Workbook.Worksheets.Add("ExcelExport");
             BuildExcelHeader(ws, 1, info);
@@ -69,7 +69,7 @@ namespace RJ.Utils
         private static List<ColumnInfo> BuildColumnInfo(Type tpe)
         {
             List<ColumnInfo> retVal = new List<ColumnInfo>();
-            var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelIgnoreAttribute>() != null).ToList();
+            var propertyInfos = tpe.GetProperties().Where(p => p.CanRead && p.GetCustomAttribute<ExcelIgnoreAttribute>() == null).ToList();
             int fieldNameCounter = 0;
             foreach (var pi in propertyInfos)
             {
@@ -77,11 +77,17 @@ namespace RJ.Utils
                 var headerNameAttribute = pi.GetCustomAttribute<ExcelHeaderAttribute>();
                 var formatStringAttribute = pi.GetCustomAttribute<ExcelFormatAttribute>();
                 var typeCode  = Type.GetTypeCode(pi.PropertyType);
-                //To do : Check for Nullable Types
-                ColumnInfo fi = new ColumnInfo
+                if (pi.PropertyType.IsGenericType)
                 {
-                    NaturalOrder = fieldNameCounter++
-                };
+                    if (pi.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
+                    {
+                        typeCode = Type.GetTypeCode(pi.PropertyType.GetGenericArguments()[0]);
+                    }
+                    else
+                        continue;
+                }
+                ColumnInfo ci = new ColumnInfo() { Getter = pi };
+                fieldNameCounter++;
                 switch (typeCode)
                 {                                    
                     case TypeCode.Int16:                       
@@ -94,27 +100,28 @@ namespace RJ.Utils
                     case TypeCode.UInt32:
                     case TypeCode.UInt64:
                     case TypeCode.Byte:
-                        fi.DataType = ExcelDataType.Number;
+                        ci.DataType = ExcelDataType.Number;
                         break;
                     case TypeCode.Boolean:
-                        fi.DataType = ExcelDataType.Boolean;
+                        ci.DataType = ExcelDataType.Boolean;
                         break;
                     case TypeCode.Char:
                     case TypeCode.String:
-                        fi.DataType = ExcelDataType.String;
+                        ci.DataType = ExcelDataType.String;
                         break;
                     case TypeCode.DateTime:
-                        fi.DataType = ExcelDataType.DateTime;
+                        ci.DataType = ExcelDataType.DateTime;
                         break;   
                     default:
                         continue;//Object types has to be flattened to the primitive types
                 }
-                fi.DisplayOrder = displayOrderAttribute != null ? displayOrderAttribute.ColumnOrder : 0;
-                fi.HeaderName = headerNameAttribute != null ? headerNameAttribute.Name : pi.Name;
-                fi.FormatString = formatStringAttribute != null ? formatStringAttribute.Format : null;
-                retVal.Add(fi);
+                ci.DisplayOrder = displayOrderAttribute != null ? displayOrderAttribute.ColumnOrder : fieldNameCounter;
+                ci.HeaderName = headerNameAttribute != null ? headerNameAttribute.Name : pi.Name;
+                ci.FormatString = formatStringAttribute != null ? formatStringAttribute.Format : null;
+                ci.ColumnNumber = ci.DisplayOrder;
+                retVal.Add(ci);
             }
-            return retVal.OrderBy(o => o.DisplayOrder).ThenBy(o => o.NaturalOrder).ToList();
+            return retVal.OrderBy(o => o.DisplayOrder).ToList();
         }
 
         private static void BuildExcelHeader(ExcelWorksheet ws,int row,List<ColumnInfo> columnInfos)
@@ -128,9 +135,9 @@ namespace RJ.Utils
         }
         private static void WriteExcelData<T>(ExcelWorksheet ws,int row,List<T> data,List<ColumnInfo> props)
         {
-            foreach (var d in data)
+            foreach (var obj in data)
             {
-                WriteExcelRows(ws, row, data, props);
+                WriteExcelRows(ws, row, obj, props);
                 row++;
             }
         }
@@ -175,9 +182,8 @@ namespace RJ.Utils
                             {
                               cellData = "True";
                             }
-                            break;                        
-                    }
-                
+                            break;                      
+                    }                
                 }
                 ws.Cells[row, ci.ColumnNumber].Value = cellData;
             }

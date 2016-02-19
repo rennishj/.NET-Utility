@@ -38,11 +38,11 @@ namespace RJ.MVC.Controllers
         {
             return new List<Person>()
             {            
-                 new Person{PersonId = 1,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225"},
-                 new Person{PersonId = 2,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225"},
-                 new Person{PersonId = 3,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225"},
-                 new Person{PersonId = 4,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225"},
-                 new Person{PersonId = 5,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225"}
+                 new Person{PersonId = 1,FirstName  = "Rennish",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225",DOB = new DateTime(1979,12,03),OrderId= 100,OrderAmount = 23.45m},
+                 new Person{PersonId = 2,FirstName  = "Anupama",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225",DOB = new DateTime(1982,04,20),OrderAmount = 145.34m},
+                 new Person{PersonId = 3,FirstName  = "Nathan",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225",DOB = new DateTime(2012,12,18),OrderAmount = 23.45m},
+                 new Person{PersonId = 4,FirstName  = "Nora",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225",DOB = new DateTime(2014,10,10)},
+                 new Person{PersonId = 5,FirstName  = "Neha",LastName = "Joseph",Email = "rennishj@gmail.com",ZipCode = "32225",DOB = new DateTime(2007,09,12)}
             };
         }
     }
