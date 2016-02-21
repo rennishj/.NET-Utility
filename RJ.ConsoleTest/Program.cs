@@ -22,10 +22,13 @@ namespace RJ.ConsoleTest
                 //TestSelectMany();
                 //InvokeFibonacciNumbers();       
 
-                RJ.ConsoleTest.DerivedC.NestedC c1 = new DerivedC.NestedC();
-                BaseC.NestedC c2 = new BaseC.NestedC();
-                Console.WriteLine(c1.x);
-                Console.WriteLine(c2.x);
+                //RJ.ConsoleTest.DerivedC.NestedC c1 = new DerivedC.NestedC();
+                //BaseC.NestedC c2 = new BaseC.NestedC();
+                //Console.WriteLine(c1.x);
+                //Console.WriteLine(c2.x);
+                SpliAndPrintCharacters("Rennish Joseph|Nathan John Joseph|Anupama Joseph|Nora Ann Joseph|Neha Rennish Joseph|");
+
+                Console.ReadLine();
             }
             catch (Exception ex)
             {
@@ -38,7 +41,7 @@ namespace RJ.ConsoleTest
                 }
             }
             //Console.WriteLine("Finished wrting to the file");
-            Console.ReadKey();
+            Console.ReadLine();
 
         }
 
@@ -56,33 +59,55 @@ namespace RJ.ConsoleTest
 
         public static List<int> PrintFibonacci(int number)
         {
-            List<int> result = new List<int>();
-            if (number == 0)
-            {
-                result.Add(0);
-                return result;
-            }
-            else if (number == 1)
-            {
-                result.Add(0);
-                return result;
-            }
-            else if (number == 2)
-            {
-                result.AddRange(new List<int>() { 0, 1 });
-                return result;
-            }
-            else
-            {
-                //if we got thus far,we should have f1,f2 and f3 as fibonacci numbers
-                int f1 = 0,
-                    f2 = 1;
+            //List<int> result = new List<int>();
+            //if (number == 0)
+            //{
+            //    result.Add(0);
+            //    return result;
+            //}
+            //else if (number == 1)
+            //{
+            //    result.Add(0);
+            //    return result;
+            //}
+            //else if (number == 2)
+            //{
+            //    result.AddRange(new List<int>() { 0, 1 });
+            //    return result;
+            //}
+            //else
+            //{
+            //    //if we got thus far,we should have f1,f2 and f3 as fibonacci numbers
+            //    int f1 = 0,
+            //        f2 = 1;
 
-                result.AddRange(new List<int>() { f1, f2 });
-                for (int i = 2; i < number; i++)
-                {
-                    result.Add(result[i - 1] + result[i - 2]);
-                }
+            //    result.AddRange(new List<int>() { f1, f2 });
+            //    for (int i = 2; i < number; i++)
+            //    {
+            //        result.Add(result[i - 1] + result[i - 2]);
+            //    }
+            //}
+            //return result;
+
+            List<int> result = new List<int>();
+            if(number == 0)
+                return result;
+            if (number == 1)
+            {
+                result.Add(0);
+                return result;
+            }            
+            if (number == 2)
+            {
+                result.AddRange(new List<int> { 0, 1 });
+                return result;
+            }
+            int f1 = 0,
+                f2 = 1;
+            result.AddRange(new List<int> { f1, f2 });
+            for (int i = 2; i < number; i++)
+            {
+                result.Add(result[i - 1] + result[i - 2]);
             }
             return result;
 
@@ -154,9 +179,9 @@ namespace RJ.ConsoleTest
 
         private static string ReverseString(string str)
         {
-            char[] charArray = str.ToCharArray();
-            Array.Reverse(charArray);
-            return new string(charArray);
+            char[] original = str.ToCharArray();
+            Array.Reverse(original);
+            return new string(original);
         }
         private static void TestPolymorphism()
         {
@@ -167,6 +192,16 @@ namespace RJ.ConsoleTest
             {
                 shape.Draw();
             }
+        }
+
+        private static void SpliAndPrintCharacters(string input)
+        {
+            string[] sArray = input.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var str in sArray)
+            {
+                Console.WriteLine(str);
+            }
+            
         }
 
         private static void PrintHeader()
