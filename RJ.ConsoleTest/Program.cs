@@ -26,8 +26,9 @@ namespace RJ.ConsoleTest
                 //BaseC.NestedC c2 = new BaseC.NestedC();
                 //Console.WriteLine(c1.x);
                 //Console.WriteLine(c2.x);
-                SpliAndPrintCharacters("Rennish Joseph|Nathan John Joseph|Anupama Joseph|Nora Ann Joseph|Neha Rennish Joseph|");
-
+                //SpliAndPrintCharacters("Rennish Joseph|Nathan John Joseph|Anupama Joseph|Nora Ann Joseph|Neha Rennish Joseph|");
+                Console.WriteLine("Aray in the normal order :" + "1,2,3,4,5,6");
+                PrintAnArrayInReverse(new int[] { 1, 2, 3, 4, 5, 6 });
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -45,11 +46,11 @@ namespace RJ.ConsoleTest
 
         }
 
-        private static void InvokeFibonacciNumbers()
+        private static void FirstNFibonacciNumbers()
         {
             Console.WriteLine("Please enter a number");
             int number = Convert.ToInt32(Console.ReadLine());
-            var fib = PrintFibonacci(number);
+            var fib = FirstNFibonacciNumbers(number);
             foreach (var item in fib)
             {
                 Console.WriteLine(item);
@@ -57,7 +58,17 @@ namespace RJ.ConsoleTest
 
         }
 
-        public static List<int> PrintFibonacci(int number)
+        private static void PrintAnArrayInReverse(int[] a)
+        {
+            
+            for (int i = a.Length-1; i >=0 ; i--)
+            {
+
+                Console.WriteLine(a[i]);
+            }
+        }
+
+        public static List<int> FirstNFibonacciNumbers(int number)
         {
             //List<int> result = new List<int>();
             //if (number == 0)
@@ -192,6 +203,11 @@ namespace RJ.ConsoleTest
             {
                 shape.Draw();
             }
+        }
+
+        private static bool CompareDates(DateTime date1 ,DateTime date2)
+        {
+            return DateTime.Compare(date1, date2) == 0 ? true : false;
         }
 
         private static void SpliAndPrintCharacters(string input)
