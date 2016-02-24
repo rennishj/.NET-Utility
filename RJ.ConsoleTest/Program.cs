@@ -1,4 +1,5 @@
 ﻿using RJ.BLL;
+using RJ.ConsoleTest.DesignPatterns;
 using RJ.Poco;
 using RJ.Utils;
 using System;
@@ -27,8 +28,11 @@ namespace RJ.ConsoleTest
                 //Console.WriteLine(c1.x);
                 //Console.WriteLine(c2.x);
                 //SpliAndPrintCharacters("Rennish Joseph|Nathan John Joseph|Anupama Joseph|Nora Ann Joseph|Neha Rennish Joseph|");
-                Console.WriteLine("Aray in the normal order :" + "1,2,3,4,5,6");
-                PrintAnArrayInReverse(new int[] { 1, 2, 3, 4, 5, 6 });
+                //Console.WriteLine("Aray in the normal order :" + "1,2,3,4,5,6");
+                //PrintAnArrayInReverse(new int[] { 1, 2, 3, 4, 5, 6 });
+                var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9,9,1,1,5,8,6 };
+                Console.WriteLine(HasDuplicates(list)); 
+
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -67,7 +71,6 @@ namespace RJ.ConsoleTest
                 Console.WriteLine(a[i]);
             }
         }
-
         public static List<int> FirstNFibonacciNumbers(int number)
         {
             //List<int> result = new List<int>();
@@ -122,6 +125,26 @@ namespace RJ.ConsoleTest
             }
             return result;
 
+        }
+
+        private static bool HasDuplicates(List<int> sodokuNumbers)
+        {
+            //http://stackoverflow.com/questions/18547354/c-sharp-linq-find-duplicates-in-list
+            //The below will give you how many times an element is repeated
+            var result = sodokuNumbers.GroupBy(x => x)
+                                       .Where(x => x.Count() > 1)
+                                       .Select(e => new{Element = e.Key,Counter = e.Count()})
+                                       .ToList();
+            return result.Any(a => a.Counter > 0);                  
+            
+        }
+
+        private void TestTuples()
+        {
+            var t1 = new Tuple<string, int, Address>("Rennish", 36, new Address { Id = 1,Address1 = "123 Mainstreet"});
+            string name = t1.Item1;
+            int age = t1.Item2;
+            Address address = t1.Item3;
         }
 
         private static void TestSelectMany()
@@ -256,6 +279,11 @@ namespace RJ.ConsoleTest
         {
             Console.WriteLine("Base classes Draw");
         }
+    }
+    public class Address
+    {
+        public int Id { get; set; }
+        public string Address1 { get; set; }
     }
     public class Circle : Shape
     {

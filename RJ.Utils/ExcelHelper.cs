@@ -197,7 +197,6 @@ namespace RJ.Utils
         public string HeaderName { get; set; }
         public string FormatString { get; set; }
         public ExcelDataType DataType { get; set; }
-        public int NaturalOrder { get; set; }
         public int ColumnNumber { get; set; }
         public PropertyInfo Getter { get; set; }
 
@@ -209,8 +208,5 @@ namespace RJ.Utils
         String,
         DateTime,
         Boolean
-
     }
-
-
 }

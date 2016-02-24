@@ -38,6 +38,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Poco", "Poco", "{4776D881-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.Poco", "RJ.Poco\RJ.Poco.csproj", "{AAA8C731-FEA6-45D6-946D-93F3C5287812}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlInterviewQuestions", "SqlInterviewQuestions", "{8B34CA24-185C-4D24-AD01-8B3C11C5BB81}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\SqlIInterviewQuestions\SqlInterview.sql = ..\..\..\..\SqlIInterviewQuestions\SqlInterview.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
