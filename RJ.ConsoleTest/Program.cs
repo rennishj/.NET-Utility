@@ -1,5 +1,7 @@
 ﻿using RJ.BLL;
 using RJ.ConsoleTest.DesignPatterns;
+using RJ.ConsoleTest.PrepClass;
+using RJ.DAL.DAL;
 using RJ.Poco;
 using RJ.Utils;
 using System;
@@ -30,8 +32,11 @@ namespace RJ.ConsoleTest
                 //SpliAndPrintCharacters("Rennish Joseph|Nathan John Joseph|Anupama Joseph|Nora Ann Joseph|Neha Rennish Joseph|");
                 //Console.WriteLine("Aray in the normal order :" + "1,2,3,4,5,6");
                 //PrintAnArrayInReverse(new int[] { 1, 2, 3, 4, 5, 6 });
-                var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9,9,1,1,5,8,6 };
-                Console.WriteLine(HasDuplicates(list)); 
+                //var list = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9,9,1,1,5,8,6 };
+                //Console.WriteLine(HasDuplicates(list)); 
+                //Console.WriteLine("{0}",ScopeMonitor.fullUrl);
+
+                CreateStudentCourse();
 
                 Console.ReadLine();
             }
@@ -248,6 +253,23 @@ namespace RJ.ConsoleTest
             string[] columns = new string[] { "PersonId", "FirstName", "LastName" };
             string header = string.Join("|", columns);
             Console.WriteLine(header);
+        }
+
+        private static void CreateStudentCourse()
+        {
+            Student student = new Student
+            {
+                Name = "Rennish Joseph",
+                Email = "rennishj@gmail.com",
+                Courses = new List<Course>()
+                {
+                    new Course(){CourseId = 1},
+                    new Course(){CourseId = 2},
+                    new Course(){CourseId = 3}
+                }
+            };
+
+            StudentAccess.CreateStudent(student);
         }
 
         private static List<Person> GetPersons()

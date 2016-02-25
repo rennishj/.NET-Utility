@@ -30,6 +30,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SqlScripts", "SqlScripts", 
 	ProjectSection(SolutionItems) = preProject
 		InsertSampleData.sql = InsertSampleData.sql
 		..\..\..\WebAPI\NetUtilityScripts.sql = ..\..\..\WebAPI\NetUtilityScripts.sql
+		..\..\..\..\SqlIInterviewQuestions\SudentCourseDDL.sql = ..\..\..\..\SqlIInterviewQuestions\SudentCourseDDL.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.Utils", "RJ.Utils\RJ.Utils.csproj", "{D89616CF-9CE6-4A9C-B67F-FF7E7A05EE30}"

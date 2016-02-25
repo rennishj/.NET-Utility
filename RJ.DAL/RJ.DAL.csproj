@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="ConnectionHelper\ConnectionHelper.cs" />
     <Compile Include="DAL\MenuAccess.cs" />
+    <Compile Include="DAL\StudentAccess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
