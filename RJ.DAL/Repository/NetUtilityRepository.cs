@@ -12,6 +12,7 @@ namespace RJ.DAL.Repository
     /// <summary>
     /// This shows how to create a repository for a disconnected application.
     /// Repository sits on top of NinjaContext
+    /// Make calls into the Repository from the MVC controller
     /// </summary>
    public class NetUtilityRepository
     {
@@ -28,7 +29,7 @@ namespace RJ.DAL.Repository
        {
            using (var cxt = new NinjaContext())
            {
-               //This can also be used
+               //This can also be used and it makes a trip to the database
                //return cxt.Ninjas.Find(id);
                return cxt.Ninjas.AsNoTracking().FirstOrDefault(o => o.Id == id);
            }
@@ -91,12 +92,18 @@ namespace RJ.DAL.Repository
            }
        }
 
-       public void SaveUpdatedEquipmentAnotherWay(NinjaEquipment eqp,int ninja)
+       public void SaveUpdatedEquipmentAnotherWay(NinjaEquipment eqp,int ninjaId)
        {
            using (var cxt = new NinjaContext())
            {
-               var equipmentWithNinjaFromDatabase = cxt.Equipment.Include(e => e.Ninja).FirstOrDefault(e => e.Id == eqp.Id);
-               cxt.Entry(equipmentWithNinjaFromDatabase).CurrentValues.SetValues(eqp);
+               //This happens if you dont have a  foreign key (NInjaId ) on the model
+               //var equipmentWithNinjaFromDatabase = cxt.Equipment.Include(e => e.Ninja).FirstOrDefault(e => e.Id == eqp.Id);
+               //cxt.Entry(equipmentWithNinjaFromDatabase).CurrentValues.SetValues(eqp);
+               //cxt.SaveChanges();
+
+               //Better way is
+               var equipment = cxt.Equipment.Find(eqp.Id);
+               cxt.Entry(eqp).State = System.Data.Entity.EntityState.Modified;
                cxt.SaveChanges();
            }
 
