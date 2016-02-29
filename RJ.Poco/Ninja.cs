@@ -50,5 +50,6 @@ namespace RJ.Poco
         public string Name { get; set; }
         public int NinjaId { get; set; }
         public EquipmentType Type { get; set; }
+        public Ninja Equipment { get; set; }
     }
 }
