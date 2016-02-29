@@ -58,6 +58,8 @@
     <Compile Include="ConnectionHelper\ConnectionHelper.cs" />
     <Compile Include="DAL\MenuAccess.cs" />
     <Compile Include="DAL\StudentAccess.cs" />
+    <Compile Include="EF6\NinjaContext.cs" />
+    <Compile Include="Exceptions\NetUtilityException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -69,9 +71,7 @@
   <ItemGroup>
     <Content Include="EFDevNotes\EF6DevNotes.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="EF6\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\RJ.Poco\RJ.Poco.csproj">
       <Project>{aaa8c731-fea6-45d6-946d-93f3c5287812}</Project>

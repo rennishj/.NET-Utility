@@ -42,7 +42,9 @@
     <Compile Include="Attributes\CustomAttributes.cs" />
     <Compile Include="Attributes\ExcelAttributes.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Contracts\IModificationHistory.cs" />
     <Compile Include="MenuItem.cs" />
+    <Compile Include="Ninja.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
