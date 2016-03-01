@@ -18,6 +18,19 @@ namespace RJ.WebApi.Controllers
             return Ok(ProductsReadAll());
         }
 
+        [Route("api/products")]
+        public IHttpActionResult Search(string search)
+        {
+            return Ok(ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList());
+        }
+
+        [Route("api/product/{search}")]
+        public IHttpActionResult Get(string search)
+        {
+            var result = ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList();
+            return Ok(result);
+        }
+
         private List<Product> ProductsReadAll()
         {
             var products = new List<Product>()
