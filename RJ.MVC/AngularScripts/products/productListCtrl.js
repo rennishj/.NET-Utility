@@ -14,6 +14,7 @@
         }); */
 
         //This is for passing the search params as a Url segment and not as a query string
+        //$resource.query method issues an HTTP Get request
         vm.searchCriteria = 'IWCF';
         productResource.query({ search: vm.searchCriteria }, function (data) {
             vm.productList = data;

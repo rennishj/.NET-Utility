@@ -36,9 +36,17 @@ namespace RJ.WebApi.Controllers
         {
             return Ok(ProductsReadAll().FirstOrDefault(p => p.ProductId == id));
         }
-        public IHttpActionResult Put([FromBody]Product product,int id)
+        
+        [Route("api/product/{id:int}")]
+        public IHttpActionResult Put(int id,[FromBody]Product product)
         {
             return Ok();
+        }
+
+        [Route("api/product")]
+        public IHttpActionResult Post([FromBody]Product product)
+        {
+            return Ok(new { Message = "Product created successfully" });
         }
 
         private List<Product> ProductsReadAll()

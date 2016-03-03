@@ -1,0 +1,91 @@
+﻿{
+    "orderId": 1,
+    "orderTotal": 123.34,
+    "orderDate": "03/03/2016",
+    "customer": {
+        "firstName": "rennish",
+        "lastName": "joseph",
+        "email": "rennishj@gmail.com",
+        "address": {
+            "address1": "123 Mainstreet",
+            "zip": "32225",
+            "state": "FL",
+            "country": "USA"
+        }
+    },
+    "packages": [
+        {
+            "packageId": 1,
+            "orderId": 1,
+            "shipDate": "06/01/2016",
+            "packageItems": [
+                {
+                    "packageItemId": 1,
+                    "packageId": 1,
+                    "qty": 10,
+                    "size": "SM"
+                },
+                {
+                    "packageItemId": 2,
+                    "packageId": 2,
+                    "qty": 10,
+                    "size": "XL"
+                }
+            ]
+        },
+        {
+            "packageId": 2,
+            "orderId": 1,
+            "shipDate": "05/01/2016",
+            "packageItems": [
+                {
+                    "packageItemId": 3,
+                    "packageId": 1,
+                    "qty": 10,
+                    "size": "SM"
+                },
+                {
+                    "packageItemId": 4,
+                    "packageId": 2,
+                    "qty": 10,
+                    "size": "XL"
+                }
+            ]
+        },
+        {
+            "packageId": 3,
+            "orderId": 1,
+            "shipDate": "05/02/2014",
+            "packageItems": [
+                {
+                    "packageItemId": 5,
+                    "packageId": 1,
+                    "qty": 10,
+                    "size": "SM"
+                },
+                {
+                    "packageItemId": 6,
+                    "packageId": 2,
+                    "qty": 10,
+                    "size": "XL"
+                }
+            ]
+        }
+    ],
+    "packageItems": [
+        {
+
+            "packageItemId": 12345,
+            "packageId": 12345,
+            "qty": 12,
+            "size": "L"
+        },
+        {
+
+            "packageItemId": 2000,
+            "packageId": 12345,
+            "qty": 200,
+            "size": "M"
+        },
+    ]
+}

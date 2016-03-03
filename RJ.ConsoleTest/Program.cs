@@ -1,4 +1,5 @@
-﻿using RJ.BLL;
+﻿using Newtonsoft.Json.Linq;
+using RJ.BLL;
 using RJ.ConsoleTest.DesignPatterns;
 using RJ.ConsoleTest.PrepClass;
 using RJ.DAL.DAL;
@@ -9,6 +10,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace RJ.ConsoleTest
 {
@@ -36,8 +40,11 @@ namespace RJ.ConsoleTest
                 //Console.WriteLine(HasDuplicates(list)); 
                 //Console.WriteLine("{0}",ScopeMonitor.fullUrl);
 
-                CreateStudentCourse();
+                //CreateStudentCourse();
 
+                //ParseJsonFile();
+                //TestSelectMany();
+                DeserializeJsonToCSharp();
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -160,27 +167,29 @@ namespace RJ.ConsoleTest
               new Order{OrderId = 1,Packages = new List<Package>()
               {
                 new Package{PackageId = 1,OrderId = 1,ShipDate = new DateTime(2015,12,31),
-                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 1,PackageId = 1,Qty = 10,Size = "SM"},
+                            PackageItems = new List<PackageItems>(){new PackageItems{PackageItemId = 1,PackageId = 1,Qty = 10,Size = "SM"},
                                                              new PackageItems{PackageItemId = 2,PackageId = 2,Qty = 10,Size = "XL"}}},
                 new Package{PackageId = 2,OrderId = 1,ShipDate = new DateTime(2015,12,25),
-                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 3,PackageId = 1,Qty = 10,Size = "SM"},
+                            PackageItems = new List<PackageItems>(){new PackageItems{PackageItemId = 3,PackageId = 1,Qty = 10,Size = "SM"},
                                                              new PackageItems{PackageItemId = 4,PackageId = 2,Qty = 10,Size = "XL"}}},
                 new Package{PackageId = 3,OrderId = 1,ShipDate = new DateTime(2016,02,10),
-                            Items = new List<PackageItems>(){new PackageItems{PackageItemId = 5,PackageId = 1,Qty = 10,Size = "SM"},
+                            PackageItems = new List<PackageItems>(){new PackageItems{PackageItemId = 5,PackageId = 1,Qty = 10,Size = "SM"},
                                                              new PackageItems{PackageItemId = 6,PackageId = 2,Qty = 10,Size = "XL"}}}
               }}
             };
 
-            var packageItemIds = orders.SelectMany(o => o.Packages)
-                                        .SelectMany(p => p.Items)
-                                        .Where(pi => pi.Qty > 0 && pi.Size.ToLower().Equals("xl"))
-                                        .Select(pki => pki.PackageItemId)
-                                        .Distinct()
-                                        .ToList();
-            foreach (var item in packageItemIds)
-            {
-                Console.WriteLine(item);
-            }
+            //var packageItemIds = orders.SelectMany(o => o.Packages)
+            //                            .SelectMany(p => p.PackageItems)
+            //                            .Where(pi => pi.Qty > 0 && pi.Size.ToLower().Equals("xl"))
+            //                            .Select(pki => pki.PackageItemId)
+            //                            .Distinct()
+            //                            .ToList();
+            //foreach (var item in packageItemIds)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+            JsonSerialize(orders);
         }
 
         private static void CsvHelperMethod()
@@ -236,6 +245,22 @@ namespace RJ.ConsoleTest
         private static bool CompareDates(DateTime date1 ,DateTime date2)
         {
             return DateTime.Compare(date1, date2) == 0 ? true : false;
+        }
+
+        private static void DeserializeJsonToCSharp()
+        {
+            var filePath = @"C:\DotNetApplications\GitRepos\NetUtility\NetUtility\RJ.ConsoleTest\JsonFile\order.json";
+            using (var sr = new StreamReader(filePath))
+            {
+                var jsonString = sr.ReadToEnd();                
+                var order = JsonConvert.DeserializeObject<Order>(jsonString);
+            }
+        }
+
+        private static void JsonSerialize(List<Order> orders)
+        {
+            var jsonSerialserSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+            var jsonString = JsonConvert.SerializeObject(orders, jsonSerialserSettings);
         }
 
         private static void SpliAndPrintCharacters(string input)

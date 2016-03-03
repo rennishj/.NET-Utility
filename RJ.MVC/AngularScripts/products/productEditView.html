@@ -53,8 +53,9 @@
                     <textarea class="form-control"
                               id="inputDescription"
                               name="inputDescription"
+                              ng-model="vm.product.description"
                               placeholder="Description(Required)"
-                              rows="4" 
+                              rows="3" 
                               required>
                     </textarea>
                     <span ng-show="productForm.inputDescription.$error.required">Description is required</span>
@@ -62,7 +63,7 @@
             </div>
             <div class="row">
                 <div class="col-md-offset-10 col-md-1">
-                    <input type="submit" class="btn-primary btn-sm" ng-click="vm.save()" value="Submit" ng-disabled="productForm.$invalid"/>
+                    <input type="submit" class="btn-primary btn-sm" ng-click="vm.submit()" value="Submit" ng-disabled="productForm.$invalid" />
                 </div>
                 <div class="col-md-1">
                     <input type="submit" class="btn-primary btn-sm" ng-click="vm.cancel(productForm)" value="Cancel" />
