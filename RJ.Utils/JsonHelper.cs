@@ -12,7 +12,7 @@ namespace RJ.Utils
 {
    public  class JsonHelper
     {
-       public static object Deserialize<T>(string filePath)
+       public static T Deserialize<T>(string filePath)
        {
            filePath = @"C:\DotNetApplications\GitRepos\NetUtility\NetUtility\RJ.ConsoleTest\JsonFile\order.json";
            using (var sr = new StreamReader(filePath))

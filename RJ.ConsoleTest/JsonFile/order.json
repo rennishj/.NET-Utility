@@ -74,14 +74,12 @@
     ],
     "packageItems": [
         {
-
             "packageItemId": 12345,
             "packageId": 12345,
             "qty": 12,
             "size": "L"
         },
         {
-
             "packageItemId": 2000,
             "packageId": 12345,
             "qty": 200,
