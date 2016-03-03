@@ -190,6 +190,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AngularScripts\app.js" />
+    <Content Include="AngularScripts\products\productEditCtrl.js" />
+    <Content Include="AngularScripts\products\productEditView.html" />
     <Content Include="AngularScripts\products\productListCtrl.js" />
     <Content Include="AngularScripts\products\productsListView.html" />
     <Content Include="AngularScripts\services\productResources.js" />

@@ -30,6 +30,16 @@ namespace RJ.WebApi.Controllers
             var result = ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList();
             return Ok(result);
         }
+        
+        [Route("api/product/{id:int}")]
+        public IHttpActionResult Get(int id)
+        {
+            return Ok(ProductsReadAll().FirstOrDefault(p => p.ProductId == id));
+        }
+        public IHttpActionResult Put([FromBody]Product product,int id)
+        {
+            return Ok();
+        }
 
         private List<Product> ProductsReadAll()
         {

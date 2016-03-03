@@ -1,0 +1,73 @@
+﻿<form name="productForm" class="form-horizontal" novalidate>
+    <div class="panel panel-primary" ng-controller="productEditCtrl as vm">
+        <div class="panel-heading" style="font-size:large;">
+            <span>Product Edit View</span>
+        </div>
+        <fieldset>
+            <legend>Basic Product Information</legend>
+            <div class="form-group" ng-class="{'has-error':productForm.inputProductName.$invalid && productForm.inputProductName.$dirty}">
+                <label for="inputProductName" class="col-md-2 control-label">Name</label>
+                <div class="col-md-4">
+                    <input type="text" 
+                           name="inputProductName"
+                           id="inputProductName" 
+                           class="form-control" 
+                           ng-model="vm.product.productName" 
+                           placeholder="Product Name (Required)" 
+                           ng-minlength="4" 
+                           ng-maxlength="12" 
+                           required />
+                    <span ng-show="productForm.inputProductName.$error.required">Product Name is required</span>
+                    <span ng-show="productForm.inputProductName.$error.minlength">Name must be minimum 4 characters long</span>
+                    <span ng-show="productForm.inputProductName.$error.maxlength">Name must be max 12 characters long</span>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{'has-error':productForm.inputProductCode.$invalid && productForm.inputProductCode.$dirty}">
+                <label for="inputProductCode" class="col-md-2 control-label">Product Code</label>
+                <input type="text" 
+                       name="inputProductCode" 
+                       id="inputProductCode" 
+                       class="form-control" 
+                       ng-model="vm.product.productCode"
+                       placeholder="Product Code(Required)"
+                       required/>
+                <span ng-show="productForm.inputProductName.$error.required">Product Code is required</span>
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" name="price" class="form-control" ng-model="vm.productPrice" />
+            </div>
+            <div class="form-group">
+                <label for="productReleaseDate" class="col-md-2 control-label">Release Date</label>
+                <div class="col-md-4">
+                    <span>{{vm.releaseDate | date}}</span>
+                </div>                
+            </div>
+            <div class="form-group" ng-class="{'has-error'':productForm.inputDescription.$invalid && productForm.inputDescription.$dirty}">
+                <label for="inputDescription" class="col-md-2 control-label">Description</label>
+                <div class="col-md-10">
+                    <textarea class="form-control"
+                              id="inputDescription"
+                              name="inputDescription"
+                              placeholder="Description(Required)"
+                              rows="4" 
+                              required>
+                    </textarea>
+                    <span ng-show="productForm.inputDescription.$error.required">Description is required</span>
+                </div>                
+            </div>
+            <div class="form-control">
+                <div class="col-md-6">
+                    <input type="submit" class="btn-primary btn-sm" ng-click="vm.save()" value="Submit" ng-disabled="productForm.$invalid"/>
+                </div>
+                <div class="col-md-6">
+                    <input type="submit" class="btn-primary btn-sm" ng-click="vm.cancel(productForm)" value="Cancel" />
+                </div>
+            </div>
+            
+        </fieldset>
+    </div>
+</form>
+
+
+
