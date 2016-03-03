@@ -1,18 +1,10 @@
-﻿using Newtonsoft.Json.Linq;
-using RJ.BLL;
-using RJ.ConsoleTest.DesignPatterns;
-using RJ.ConsoleTest.PrepClass;
+﻿using RJ.BLL;
 using RJ.DAL.DAL;
 using RJ.Poco;
 using RJ.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace RJ.ConsoleTest
 {
@@ -43,8 +35,8 @@ namespace RJ.ConsoleTest
                 //CreateStudentCourse();
 
                 //ParseJsonFile();
-                //TestSelectMany();
-                DeserializeJsonToCSharp();
+                TestSelectMany();
+                
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -189,7 +181,7 @@ namespace RJ.ConsoleTest
             //    Console.WriteLine(item);
             //}
 
-            JsonSerialize(orders);
+            JsonHelper.JsonSerialize<List<Order>>(orders);
         }
 
         private static void CsvHelperMethod()
@@ -247,21 +239,21 @@ namespace RJ.ConsoleTest
             return DateTime.Compare(date1, date2) == 0 ? true : false;
         }
 
-        private static void DeserializeJsonToCSharp()
-        {
-            var filePath = @"C:\DotNetApplications\GitRepos\NetUtility\NetUtility\RJ.ConsoleTest\JsonFile\order.json";
-            using (var sr = new StreamReader(filePath))
-            {
-                var jsonString = sr.ReadToEnd();                
-                var order = JsonConvert.DeserializeObject<Order>(jsonString);
-            }
-        }
+        //private static void DeserializeJsonToCSharp()
+        //{
+        //    var filePath = @"C:\DotNetApplications\GitRepos\NetUtility\NetUtility\RJ.ConsoleTest\JsonFile\order.json";
+        //    using (var sr = new StreamReader(filePath))
+        //    {
+        //        var jsonString = sr.ReadToEnd();                
+        //        var order = JsonConvert.DeserializeObject<Order>(jsonString);
+        //    }
+        //}
 
-        private static void JsonSerialize(List<Order> orders)
-        {
-            var jsonSerialserSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
-            var jsonString = JsonConvert.SerializeObject(orders, jsonSerialserSettings);
-        }
+        //private static void JsonSerialize(List<Order> orders)
+        //{
+        //    var jsonSerialserSettings = new JsonSerializerSettings { ContractResolver = new CamelCasePropertyNamesContractResolver() };
+        //    var jsonString = JsonConvert.SerializeObject(orders, jsonSerialserSettings);
+        //}
 
         private static void SpliAndPrintCharacters(string input)
         {
