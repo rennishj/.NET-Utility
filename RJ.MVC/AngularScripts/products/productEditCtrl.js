@@ -40,17 +40,7 @@
                 vm.product.$save(function (data) {
                     vm.originalProduct = angular.copy(data);
                     vm.message = data.message;
-                }, function (response) {
-                    vm.message = response.statusText + '\r\n';
-                    if (response.data.modelState) {
-                        for (var key in response.data.modelState) {
-                            vm.message += response.data.modelState[key] + '\r\n';
-                        }
-                    }
-                    if (response.data.exceptionMessage) {
-                        vm.message += response.data.exceptionMessage;
-                    }
-                });
+                }, saveUpdateErrorMessage);
             }
         };
 
@@ -59,6 +49,18 @@
             vm.product = angular.copy(vm.originalProduct);
             vm.message = '';
         };
-    }
-        
+
+        //This is just an example where I just refactored the error function as a separate one rather than adding inline
+        function saveUpdateErrorMessage(response) {
+            vm.message = response.statusText + '\r\n';
+            if (response.data.modelState) {
+                for (var key in response.data.modelState) {
+                    vm.message += response.data.modelState[key] + '\r\n';
+                }
+            }
+            if (response.data.exceptionMessage) {
+                vm.message += response.data.exceptionMessage;
+            }
+        }
+    }   
 })();
