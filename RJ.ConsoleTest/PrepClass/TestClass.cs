@@ -18,4 +18,24 @@ namespace RJ.ConsoleTest.PrepClass
             fullUrl = firstPart + secondPart;
         }
     }
+
+
+    public class Rennish
+    {
+        public static int x = 0;
+        static Rennish()
+        {
+            x = 100;
+        }
+    }
+
+    public enum colors
+    { 
+         Blue = 1,
+         Red = 2,
+        Yellow = 4,
+        Purple = Blue | Red,
+        Green  =Yellow | Blue,
+        Oraange = Red | Yellow
+    }
 }

@@ -21,13 +21,30 @@ namespace RJ.WebApi.Controllers
         [Route("api/products")]
         public IHttpActionResult Search(string search)
         {
-            return Ok(ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList());
+            if (search == null)
+            {
+                return BadRequest("Search string cannot be null");
+            }
+            var result = ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList();
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return Ok(result);
         }
 
         [Route("api/product/{search}")]
         public IHttpActionResult Get(string search)
         {
+            if (search == null)
+            {
+                return BadRequest("Search string cannot be null");
+            } 
             var result = ProductsReadAll().Where(p => p.ProductCode.Contains(search)).ToList();
+            if (result == null)
+            {
+                return NotFound();
+            }
             return Ok(result);
         }
         
@@ -40,13 +57,33 @@ namespace RJ.WebApi.Controllers
         [Route("api/product/{id:int}")]
         public IHttpActionResult Put(int id,[FromBody]Product product)
         {
+            if (product == null)
+            {
+                return BadRequest("Product cannot be null");
+            }
             return Ok();
         }
 
         [Route("api/product")]
         public IHttpActionResult Post([FromBody]Product product)
         {
-            return Ok(new { Message = "Product created successfully" });
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+                if (product == null)
+                {                    
+                    return BadRequest("Product cannot be null");
+                }
+                //product = null;
+                return Created<Product>(Request.RequestUri + product.ProductId.ToString(), product);
+            }
+            catch (Exception ex)
+            {
+                return InternalServerError(ex);
+            }
         }
 
         private List<Product> ProductsReadAll()

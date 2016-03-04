@@ -69,12 +69,13 @@
                     <input type="submit" class="btn-primary btn-sm" ng-click="vm.cancel(productForm)" value="Cancel" />
                 </div>
             </div>
-            <div class="form-group" ng-show="vm.message">
-                <div class="col-md-6">
-                    <span>{{vm.message}}</span>
+            <div class="row">
+                <div class="col-md-6 panel" ng-show="vm.message">
+                    <div class="col-md-6">
+                        <span>{{vm.message}}</span>
+                    </div>
                 </div>
             </div>
-            
         </fieldset>
     </div>
 </form>

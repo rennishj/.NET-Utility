@@ -1,4 +1,5 @@
 ﻿using RJ.BLL;
+using RJ.ConsoleTest.PrepClass;
 using RJ.DAL.DAL;
 using RJ.Poco;
 using RJ.Utils;
@@ -35,8 +36,16 @@ namespace RJ.ConsoleTest
                 //CreateStudentCourse();
 
                 //ParseJsonFile();
-                TestSelectMany();
+                //TestSelectMany();
+
+                //string[] arry = new string[]{"first","second","third"};
+                //var taken = arry.Take(3);
+
                 
+
+                //Console.WriteLine(taken.Count());
+
+                Console.WriteLine((int)colors.Oraange);
                 Console.ReadLine();
             }
             catch (Exception ex)
@@ -54,6 +63,7 @@ namespace RJ.ConsoleTest
 
         }
 
+        
         private static void FirstNFibonacciNumbers()
         {
             Console.WriteLine("Please enter a number");
