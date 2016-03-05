@@ -32,7 +32,8 @@ namespace RJ.Api.Providers
             var userManager = context.OwinContext.GetUserManager<ApplicationUserManager>();
 
             ApplicationUser user = await userManager.FindAsync(context.UserName, context.Password);
-
+            //This is teling the Token provider to add the Access-Control-Allow-Origin to the response header
+            context.OwinContext.Response.Headers.Add("Access-Control-Allow-Origin", new[] { "http://localhost:27178" });
             if (user == null)
             {
                 context.SetError("invalid_grant", "The user name or password is incorrect.");

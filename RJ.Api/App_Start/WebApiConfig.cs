@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Serialization;
+﻿using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json.Serialization;
 using RJ.Api;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace RJ.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-         
+            config.SuppressDefaultHostAuthentication();
+            config.Filters.Add(new HostAuthenticationFilter(OAuthDefaults.AuthenticationType));
             // Web API routes            
             config.MapHttpAttributeRoutes();
             CamelCaseJson(config);

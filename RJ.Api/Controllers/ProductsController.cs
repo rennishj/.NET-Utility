@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 namespace RJ.WebApi.Controllers
 {
     [EnableCorsAttribute("http://localhost:27178", "*", "*")]
+    [Authorize]
     public class ProductsController : ApiController
     {
         [Route("api/products/all")]

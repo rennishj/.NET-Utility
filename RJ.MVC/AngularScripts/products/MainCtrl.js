@@ -2,31 +2,33 @@
     'use strict';
     angular
         .module('productManagement')
-        .controller('mainCtrl', ['userAccount', mainCtrl]);
+        .controller('mainCtrl', ['userAccount','currentUser', mainCtrl]);
 
-    function mainCtrl(userAccount) {
+    function mainCtrl(userAccount, currentUser) {
         var vm = this;
         vm.userData = {
             userName: '',
             email: '',
             password:'',
             confirmPassword:''
-        };        
-        vm.userData.bearerToken = '';
-        vm.isLoggedIn = false;
+        };
+        vm.isLoggedIn = function () {
+            return currentUser.getProfile().isLoggedIn;
+        };
         vm.message = '';
         vm.registerUser = function () {
             vm.userData.userName = vm.userData.email;
             vm.userData.confirmPassword = vm.userData.password;
-            userAccount.registerUser(vm.userData, function (data) {
+            userAccount.registration.registerUser(vm.userData, function (data) {
                 vm.message = 'User created successfully';
                 vm.isLoggedIn = true;
             }, registrationError);
         };
 
         vm.login = function () {
-            //if success
-            vm.isLoggedIn = true;
+            vm.userData.grant_type = 'password';//grant_type set to password for token based authentication.This means that the client will pass in a username and password
+            vm.userData.userName = vm.userData.email;
+            userAccount.login.loginUser(vm.userData, loginSuccess, loginError);
         };
 
         function registrationError(response) {
@@ -36,6 +38,22 @@
                 }
             }
         }
+        function loginSuccess(data) {           
+            vm.message = '';
+            vm.password = '';            
+            currentUser.setProfile(vm.userData.userName, data.access_token);
+        }
+        function loginError(response) {
+            vm.password = '';            
+            vm.message = response.statusText + '\r\n';
+            if (response.data.exceptionMessage) {
+                vm.message += response.data.exceptionMessage;
+            }
+            if (response.data.error) {
+                vm.message += response.data.error;
+            }
+        }
+
     }
 
 })();
