@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Serialization;
+using RJ.Api;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace RJ.WebApi
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
-
+         
             // Web API routes            
             config.MapHttpAttributeRoutes();
             CamelCaseJson(config);
@@ -27,6 +28,11 @@ namespace RJ.WebApi
         {
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.Formatters.JsonFormatter.UseDataContractJsonSerializer = false;
+        }
+
+        private static void ConfigureOAuthBearerTokens()
+        { 
+            //new Startup().ConfigureAuth()
         }
 
     }

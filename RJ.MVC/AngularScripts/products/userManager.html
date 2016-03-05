@@ -1,0 +1,47 @@
+﻿<form name="userForm" class="form-horizontal" ng-controller="userManagerCtrl as vm" novalidate>
+    <div class="panel panel-primary" id="userRegister">
+        <div class="form-group">
+            <label for="email" class="col-md-3 control-label">Email</label>
+            <div class="col-md-4">
+                <input type="email" name="email" ng-model="vm.user.email" class="form-control" />
+                <!-- Add validations-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Password</label>
+            <div class="col-md-4">
+                <input type="password" name="password" ng-model="vm.user.password" class="form-control" />
+                <!-- Add validations-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword" class="col-md-3 control-label">Repeat Password</label>
+            <div class="col-md-4">
+                <input type="password" name="confirmPassword" ng-model="vm.user.confirmPassword" class="form-control" />
+                <!-- Add validations-->
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register" class="btn btn-primary" ng-click="vm.register()"/>
+        </div>
+    </div>    
+    <div class="panel panel-primary" id="userLogin">
+        <div class="form-group">
+            <label for="email" class="col-md-3 control-label">Email</label>
+            <div class="col-md-4">
+                <input type="email" name="email" ng-model="vm.user.email" class="form-control" />
+                <!-- Add validations-->
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="col-md-3 control-label">Password</label>
+            <div class="col-md-4">
+                <input type="password" name="password" ng-model="vm.user.password" class="form-control" />
+                <!-- Add validations-->
+            </div>
+        </div>        
+        <div class="form-group">
+            <input type="submit" value="Login" class="btn btn-primary" ng-click="vm.login()" />
+        </div>
+    </div>
+</form>

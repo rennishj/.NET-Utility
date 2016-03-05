@@ -194,7 +194,10 @@
     <Content Include="AngularScripts\products\productEditView.html" />
     <Content Include="AngularScripts\products\productListCtrl.js" />
     <Content Include="AngularScripts\products\productsListView.html" />
+    <Content Include="AngularScripts\products\userManager.html" />
+    <Content Include="AngularScripts\products\userManagerCtrl.js" />
     <Content Include="AngularScripts\services\productResources.js" />
+    <Content Include="AngularScripts\services\userResource.js" />
     <Content Include="Content\app\app.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
