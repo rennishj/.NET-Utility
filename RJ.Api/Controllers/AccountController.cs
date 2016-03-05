@@ -16,10 +16,12 @@ using Microsoft.Owin.Security.OAuth;
 using RJ.Api.Models;
 using RJ.Api.Providers;
 using RJ.Api.Results;
+using System.Web.Http.Cors;
 
 namespace RJ.Api.Controllers
 {
     [Authorize]
+    [EnableCorsAttribute("http://localhost:27178", "*", "*")]
     [RoutePrefix("api/Account")]
     public class AccountController : ApiController
     {

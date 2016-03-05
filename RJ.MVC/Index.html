@@ -4,11 +4,26 @@
     <title>Acme Product Management</title>
     <link href="Content/bootstrap.css" rel="stylesheet" />
 </head>
-<body ng-app="productManagement">
+<body ng-app="productManagement" ng-controller="mainCtrl as vm">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <div class="navbar-header">
                 <div class="navbar-brand">Acme Product Management</div>
+                <!-- Start Login/Register Form-->
+                <form name="userForm" ng-hide="vm.isLoggedIn" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="email" name="email" ng-model="vm.userData.email" class="form-control" placeholder="UserName(Email)"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" ng-model="vm.userData.password" class="form-control" placeholder="Password"/>
+                    </div>
+                    <input type="submit" value="Register" class="btn btn-default" ng-click="vm.registerUser()" />
+                    <input type="submit" value="Login" class="btn btn-default" ng-click="vm.login()" />
+                </form>
+                <!-- End Login/Register Form-->
+                <div ng-show="vm.message">
+                    {{vm.message}}
+                </div>
             </div>
         </div>
     </nav>
@@ -19,11 +34,13 @@
     <script src="AngularScripts/services/productResources.js"></script>
     <script src="AngularScripts/products/productListCtrl.js"></script>
     <script src="AngularScripts/products/productEditCtrl.js"></script>
+    <script src="AngularScripts/services/userAccount.js"></script>
+    <script src="AngularScripts/products/mainCtrl.js"></script>
     <div class="container">
         <!--<div ng-include="'AngularScripts/products/productsListView.html'">
             <strong>You should see this</strong>
         </div>-->
-        <div ng-include="'AngularScripts/products/productEditView.html'">
+        <div ng-if="vm.isLoggedIn" ng-include="'AngularScripts/products/productEditView.html'">
             <strong>You should see this</strong>
         </div>
     </div>
