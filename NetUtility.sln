@@ -56,6 +56,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.PizzaConsoleHost", "RJ.P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.PizzaIISHost", "RJ.PizzaIISHost\RJ.PizzaIISHost.csproj", "{DB1533A2-E6CF-4BAB-9478-12824B73F9CB}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WcfClient", "WcfClient", "{42DC8DB2-3CCB-47A8-A360-D498AA6B8D56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJ.PizzaService.ConsoleClient", "RJ.PizzaService.ConsoleClient\RJ.PizzaService.ConsoleClient.csproj", "{E85ECCA4-DC91-4786-AA16-472663A1D6F2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{DB1533A2-E6CF-4BAB-9478-12824B73F9CB} = {DB1533A2-E6CF-4BAB-9478-12824B73F9CB}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -102,6 +109,10 @@ Global
 		{DB1533A2-E6CF-4BAB-9478-12824B73F9CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB1533A2-E6CF-4BAB-9478-12824B73F9CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB1533A2-E6CF-4BAB-9478-12824B73F9CB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E85ECCA4-DC91-4786-AA16-472663A1D6F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E85ECCA4-DC91-4786-AA16-472663A1D6F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E85ECCA4-DC91-4786-AA16-472663A1D6F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E85ECCA4-DC91-4786-AA16-472663A1D6F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,5 +128,6 @@ Global
 		{FF59DB71-3DA4-4EC3-9288-3CD6C5491A26} = {99580661-BB2B-4C12-AE61-452305776E01}
 		{9F84DC75-1383-4E43-A1E3-0445360A29FB} = {99580661-BB2B-4C12-AE61-452305776E01}
 		{DB1533A2-E6CF-4BAB-9478-12824B73F9CB} = {99580661-BB2B-4C12-AE61-452305776E01}
+		{E85ECCA4-DC91-4786-AA16-472663A1D6F2} = {42DC8DB2-3CCB-47A8-A360-D498AA6B8D56}
 	EndGlobalSection
 EndGlobal

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RJ.PizzaOrderingService
@@ -19,6 +20,7 @@ namespace RJ.PizzaOrderingService
 
         public List<Product> GetProducts()
         {
+            var principal = Thread.CurrentPrincipal;
             var products = new List<Product>()
             {
                 new Product{Id = 1,Name="The Works",Type = "Large",Description = "The works Pizza"},
