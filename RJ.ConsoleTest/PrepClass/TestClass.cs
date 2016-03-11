@@ -38,4 +38,27 @@ namespace RJ.ConsoleTest.PrepClass
         Green  =Yellow | Blue,
         Oraange = Red | Yellow
     }
+
+    public abstract class Nathan
+    {
+        public int Id { get; set; }
+        public abstract int Add(int x, int y);
+        public int Subtract(int x, int y)
+        {
+            return (x - y);
+        }
+    }
+
+    public class Nora : Nathan
+    {
+        public override int Add(int x, int y)
+        {
+            return (x + y);
+        }
+
+        public Nathan CreateaInstance()
+        {
+            return new Nora();
+        }
+    }
 }

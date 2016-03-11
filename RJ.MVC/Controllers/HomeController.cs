@@ -27,6 +27,11 @@ namespace RJ.MVC.Controllers
 
             return View();
         }
+
+        public ActionResult Dummy()
+        {
+            return View();
+        }
         
     }
 }

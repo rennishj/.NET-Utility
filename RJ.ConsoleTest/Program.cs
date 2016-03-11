@@ -41,11 +41,13 @@ namespace RJ.ConsoleTest
                 //string[] arry = new string[]{"first","second","third"};
                 //var taken = arry.Take(3);
 
+                string fileName = "LFN1200";
+                Console.WriteLine(fileName.PadRight(fileName.Length + 2,'0'));
                 
 
                 //Console.WriteLine(taken.Count());
 
-                Console.WriteLine((int)colors.Oraange);
+                //Console.WriteLine((int)colors.Oraange);
                 Console.ReadLine();
             }
             catch (Exception ex)
