@@ -6,7 +6,7 @@ namespace RJ.Configuration {
     /// <summary>
     /// Provides a decorator for adding caching to configuration values retrieved from an <see cref="IConfigurationSource"/>
     /// </summary>
-    /// <seealso cref="Fnf.Common.IConfigurationSource" />
+    /// <seealso cref="RJ.Configuration.IConfigurationSource" />
     public class ConfigurationSourceCache : IConfigurationSource {
 
         private readonly Dictionary<string, ConfigurationValue<string>> _properties;
