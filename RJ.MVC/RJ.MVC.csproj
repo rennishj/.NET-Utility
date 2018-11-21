@@ -20,6 +20,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -158,11 +160,16 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Configuration\ApiConfigurationSource.cs" />
+    <Compile Include="Configuration\SqlConfigurationSource.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonController.cs" />
+    <Compile Include="Data\SqlConnectionFactory.cs" />
+    <Compile Include="Dependencies\DependencyResolver.cs" />
+    <Compile Include="Dependencies\SimpleMvcControllerFactory.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -246,6 +253,14 @@
     <ProjectReference Include="..\RJ.BLL\RJ.BLL.csproj">
       <Project>{1226ec80-4a65-4f51-9acb-00fa20026826}</Project>
       <Name>RJ.BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RJ.Configuration\RJ.Configuration.csproj">
+      <Project>{940eb7ed-71fb-4ce6-8bff-71f80d0d0e23}</Project>
+      <Name>RJ.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RJ.DependencyInjection\RJ.DependencyInjection.csproj">
+      <Project>{77b24851-09cf-4f9d-8eda-cb4f4fcd7d8c}</Project>
+      <Name>RJ.DependencyInjection</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

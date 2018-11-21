@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
+﻿using RJ.Configuration;
 using System.Web.Mvc;
 
-namespace RJ.MVC.Controllers
-{
+namespace RJ.MVC.Controllers {
     public class HomeController : Controller
     {
+        private readonly IConfigurationSource _configSource;
+
+        public HomeController(IConfigurationSource configSource) {
+            _configSource = configSource;
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -16,7 +17,7 @@ namespace RJ.MVC.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = _configSource.GetValue("misc:helloMessage");
 
             return View();
         }
